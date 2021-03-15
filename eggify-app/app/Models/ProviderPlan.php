@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class ProviderPlan extends Model
+{
+    use HasFactory;
+
+    protected $table = 'providers_plan';
+
+    protected $fillable = [
+        'name',
+    ];
+}

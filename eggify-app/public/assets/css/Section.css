@@ -1,0 +1,21 @@
+body main section {
+  padding-top: 25px;
+}
+
+body.page-provider main section {
+  border-bottom: 1px solid #CAC9C9;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: bold;
+}
+
+h5 {
+  font-size: 22px;
+}
+
+.title-action {
+  color: #4489E9;
+  line-height: 30px;
+}
+

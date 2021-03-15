@@ -1,0 +1,135 @@
+<?php
+
+return [
+
+    'menu' => [
+        'dashboard' => 'Dashboard',
+        'provider' => 'Proveedor',
+        'producer' => 'Productor',
+        'operator' => 'Operador',
+        'faqs' => 'Faqs',
+        'category' => 'Categoría',
+        'subcategory' => 'Subcategoría',
+        'order' => 'Pedido',
+        'users_admin' => 'Usuarios Admin',
+    ],
+
+    'page' => [
+        'dashboard' => [
+            'title' => 'Dashboard',
+            'card' => [
+                'operators' => 'Num. Total F&B Operators',
+                'providers' => 'Num. Total Proveedores',
+                'producers' => 'Num. Total Productores',
+                'projects' => 'Num. Total Proyectos',
+            ],
+        ],
+        'category' => [
+            'title' => 'Categorias',
+            'description' => 'Descripción.',
+            'name' => 'Nombre',
+            'table' => [
+                'category' => 'Categoría',
+                'subcategory' => 'Subcategorías',
+            ],
+        ],
+        'subcategory' => [
+            'title' => 'Subcategorias',
+            'description' => 'Descripción.',
+            'name' => 'Nombre',
+        ],
+        'faq' => [
+            'title' => 'Faqs',
+            'description' => 'Descripción.',
+            'name' => 'Título',
+            'description' => 'Descripción',
+        ],
+        'users-admin' => [
+            'title' => 'Usuarios Admin',
+            'description' => 'Descripción.',
+            'table' => [
+                'name' => 'Nombre',
+                'user_type' => 'Tipo usuario',
+                'email' => 'Email',
+                'password' => 'Contraseña',
+            ],
+        ],
+        'provider' => [
+            'title' => 'Proveedor',
+            'description' => 'Descripción.',
+            'table' => [
+                'name' => 'Nombre',
+                'services' => 'Productos / Servicios',
+                'orders' => 'Num. Pedidos',
+                'plan' => 'Plan',
+                'user_type' => 'Tipo usuario',
+                'provider_type' => 'Tipo proveedor',
+                'provider_category' => 'Categoría',
+                'provider_subcategory' => 'Subcategoría',
+                'email' => 'Email',
+                'phone' => 'Teléfono',
+                'password' => 'Contraseña',
+                'address' => 'Dirección',
+            ],
+        ],
+        'producer' => [
+            'title' => 'Productor',
+            'description' => 'Descripción.',
+            'table' => [
+                'name' => 'Nombre',
+                'services' => 'Productos / Servicios',
+                'orders' => 'Num. Pedidos',
+                'plan' => 'Plan',
+                'user_type' => 'Tipo usuario',
+                'provider_type' => 'Tipo proveedor',
+                'provider_category' => 'Categoría',
+                'provider_subcategory' => 'Subcategoría',
+                'email' => 'Email',
+                'phone' => 'Teléfono',
+                'password' => 'Contraseña',
+                'address' => 'Dirección',
+            ],
+        ],
+        'operator' => [
+            'title' => 'F&B Operator',
+            'description' => 'Descripción.',
+            'table' => [
+                'name' => 'Nombre',
+                'surname' => 'Apellidos',
+                'phone' => 'Teléfono',
+                'email' => 'Email',
+                'password' => 'Contraseña',
+                'address' => 'Dirección',
+                'business' => 'Negocio',
+                'orders' => 'Num. Pedidos',
+                'plan' => 'Plan',
+                'gamification' => 'Plan de gamificación',
+                'operator_job' => 'Trabajo',
+                'operator_job_tag' => 'Tipo trabajo',
+                'operator_employees' => 'Num. Empleados',
+                'operator_position' => 'Cargo',
+            ],
+            'section' => [
+                'company' => [
+                    'title' => 'Compañía',
+                    'name' => 'Nombre',
+                    'web' => 'Web',
+                    'years' => 'Años',
+                    'linkedin' => 'LinkedIn',
+                ]
+            ]
+        ],
+        'order' => [
+            'title' => 'Pedidos',
+            'description' => 'Descripción.',
+            'name' => 'Nombre',
+            'table' => [
+                'date' => 'Fecha',
+                'user_from' => 'Usuario desde',
+                'user_to' => 'Usuario hasta',
+                'message' => 'Mensaje',
+            ],
+        ],
+    ],
+
+];
