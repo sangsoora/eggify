@@ -1,5 +1,5 @@
 @if (auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser())
-    <footer id="tools-bar">
+    <footer id="tools-bar" class="mobile">
         @if (\App\Models\User::findOrFail(auth()->user()->id)->isOperator())
             <div class="row m-auto" id="tools-bar-general">
                 <div class="col-3 text-center"><a href="{{ route('web.search.provider') }}"><i class="la la-search"></i>Proveedores</a></div>
@@ -17,9 +17,39 @@
         @endif
     </footer>
 @else
-    <footer id="tools-bar">
+    <footer id="tools-bar" class="mobile">
         <div class="row m-auto" id="tools-bar-general">
             <div class="col-3 text-center m-auto"><a href="https://community.eggify.net/"><i class="la la-comment"></i>Comunidad</a></div>
         </div>
     </footer>
 @endif
+<footer class="footer-desktop justify-content-between">
+  <div class="footer-columns">
+    <button class="btn mr-auto p-0" type="button"><a href="/"><img src="/assets/img/logo-footer.svg"></a></button>
+  </div>
+  <div class="footer-columns">
+    <h5>Información</h5>
+    <p><a href="{{ route('web.about') }}">Sobre Nosotros</a></p>
+    <p><a href="{{ route('web.search.provider') }}">Proveedores</a></p>
+    @if (auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser())
+        <p><a href="#">Inbox</a></p>
+    @endif
+    <p><a href="https://community.eggify.net/">Comunidad</a></p>
+    @if (!auth()->check())
+        <p><a href="{{ route('web.about-provider') }}">¿Eres un proveedor?</a></p>
+    @endif
+    <!-- <p><a href="">Contacto</a></p> -->
+  </div>
+  <div class="footer-columns">
+    <h5>Políticas de seguridad</h5>
+    <p><a href="https://www.eggify.net/terminos-y-condiciones">Condiciones Legales</a></p>
+    <p><a href="">Política de Privacidad</a></p>
+    <p><a href="https://www.eggify.net/copy-of-terminos-y-condiciones">Política de Cookies</a></p>
+  </div>
+  <div class="footer-columns">
+    <h5>Síguenos en</h5>
+    <p><a href="">Instagram</a></p>
+    <p><a href="">Facebook</a></p>
+    <p><a href="">YouTube</a></p>
+  </div>
+</footer>

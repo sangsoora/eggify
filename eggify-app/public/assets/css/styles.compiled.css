@@ -992,6 +992,14 @@ main, .sidenav, .side {
   z-index: 100;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
+#header-desktop, .banner-header-text-desktop, .card-custom-small-desktop, .title-desktop, .banner-middle, .banner-bottom, .footer-desktop, .anchor-desktop, .card-body-desktop, .provider-infos-desktop, .rating-desktop {
+  display: none !important;
+}
+
 @media screen and (max-height: 450px) {
   .sidenav, .sidepopup {
     padding-top: 15px;
@@ -1001,6 +1009,173 @@ main, .sidenav, .side {
   }
 }
 
-.pointer {
-    cursor: pointer;
+
+@media (max-width: 575.98px) {
+
+}
+
+@media (max-width: 767.98px) {
+
+}
+
+@media only screen and (max-width:991.98px) and (orientation: landscape) {
+
+}
+
+@media screen and (min-width: 992px) {
+  header a {
+    color: #4489E9;
+  }
+  header {
+    top: 0;
+  }
+  .mobile, .card-end {
+    display: none !important;
+  }
+  #header-desktop, .card-custom-small-desktop, .footer-desktop, .card-body-desktop, .provider-infos-desktop {
+    display: flex !important;
+  }
+  #header-desktop {
+    background: white;
+    padding: 0.5rem 1.5rem;
+    color: #4489E9;
+  }
+  #header-desktop img {
+    width: 150px;
+  }
+  #banner-header {
+    background: url(../../assets/img/kitchen.svg);
+    background-size: cover;
+    background-position: top;
+    margin-top: 76px;
+    padding: 3rem 0;
+    height: calc(100vh - 76px);
+  }
+  #banner-header .logo {
+    width: 30%;
+  }
+  #banner-header h3 {
+    color: white;
+    font-size: 3rem;
+    margin: 2rem auto;
+  }
+  #banner-header p {
+    font-size: 1.5rem;
+    margin: 1rem auto;
+  }
+  .banner-header-text-desktop, .banner-middle, .banner-bottom, .title-desktop, .anchor-desktop, .rating-desktop {
+    display: block !important;
+  }
+  .container-fluid, .footer-desktop, .card-body-desktop {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+  .card-custom-small-desktop {
+    justify-content: space-between;
+  }
+  .card-custom-small-desktop img {
+    width: 100%;
+    height: 180px;
+  }
+  .card {
+    flex: 0 0 23%;
+  }
+  .footer-desktop img {
+    width: 60%;
+  }
+  .footer-columns {
+    flex: 0 0 25%;
+  }
+  .banner-middle, .banner-bottom {
+    background: linear-gradient(180.28deg, #6BA7F0 39.17%, #91DBFF 156.18%);
+    box-shadow: 0px 2px 9px rgba(56, 102, 208, 0.5);
+    color: white;
+    padding: 3rem 0;
+  }
+  .banner-middle h2, .banner-bottom h2 {
+    font-weight: 500;
+    margin-bottom: 3rem;
+  }
+  .banner-middle button {
+    width: 100%;
+    text-align: center !important;
+  }
+  .title-desktop h2 {
+    font-weight: 600;
+  }
+  h3.title-desktop {
+    font-weight: 500;
+    line-height: 2;
+  }
+  .articles img {
+    height: 320px;
+  }
+  .testimonials {
+    justify-content: space-between;
+  }
+  .card-custom.card-custom-small.testimonials .card:not(.card-end) {
+    min-width: 0;
+    flex: 0 0 45%;
+  }
+  .nav-anchor {
+    padding: 0.5rem 1.5rem;
+    margin-top: 76px;
+  }
+  .nav-anchor a {
+    color: #4A4A4A;
+    padding: 0 5px 2px 5px;
+    margin: 0 2.5px;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  .nav-anchor a.active {
+    color: #4489E9;
+    border-bottom: 2px solid #4489E9;
+  }
+  body.page-provider main {
+    padding-top: 0;
+  }
+  .card-body-desktop {
+    width: 100%;
+    justify-content: space-between;
+    margin: 2rem auto;
+  }
+  .card-detail-columns {
+    flex: 0 0 50%;
+  }
+  .card-detail-columns p {
+    margin-bottom: 1.5rem;
+  }
+  .provider-infos-desktop {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 2rem auto;
+  }
+  .provider-infos {
+    flex: 0 0 48%;
+  }
+  .rating-avg {
+    flex: 0 0 15%;
+  }
+  .rating.rating-total .text {
+    font-size: 48px;
+  }
+  .rating.rating-total .stars {
+    display: block;
+    font-size: 16px;
+  }
+  .rating-detail {
+    flex: 0 0 80%;
+  }
+  .list-unstyled {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .list-unstyled li {
+    flex: 0 0 33%;
+  }
+}
+
+@media (max-width: 1199.98px) {
+
 }
