@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Helpers\Helper;
+use App\Models\Budget;
 use App\Models\BudgetMessage;
 use App\Models\ProviderCategorySubcategory;
 use Illuminate\Http\Request;
@@ -25,26 +26,26 @@ class OrderController extends Controller
             return abort(401);
         }
 
-        return view('admin.pages.category - copia.index');
+        return view('admin.pages.order.index');
     }
 
     public function data(Datatables $datatables)
     {
-        $query = BudgetMessage::query();
+        $query = Budget::query();
 
         return $datatables->of($query)
-            ->addColumn('action', 'admin.pages.category - copia.partials.actions')
+            ->addColumn('action', 'admin.pages.order.partials.actions')
+            ->editColumn('budget_id', function ($q) {
+                return $q->id;
+            })
             ->editColumn('date', function ($q) {
                 return $q->created_at;
             })
             ->editColumn('userfrom', function ($q) {
-                return $q->user_from->name;
+                return $q->messages->count() ? $q->messages->first()->user_from->name : '';
             })
             ->editColumn('userto', function ($q) {
-                return $q->user_to->name;
-            })
-            ->editColumn('message', function ($q) {
-                return sprintf('%s%s', substr($q->message, 0, 80), strlen($q->message) > 80 ? '...' : '');
+                return $q->messages->count() ? $q->messages->first()->user_to->name : '';
             })
             ->rawColumns([0])
             ->make(true);
@@ -54,7 +55,7 @@ class OrderController extends Controller
     {
         $subcategories = ProviderSubcategory::all();
 
-        return view('admin.pages.category.create', compact('subcategories'));
+        return view('admin.pages.order.create', compact('subcategories'));
     }
 
     public function store(Request $request)
@@ -65,7 +66,14 @@ class OrderController extends Controller
             $category->provider_subcategory()->sync($request->subcategory);
         }
 
-        return redirect()->route('admin.category');
+        return redirect()->route('admin.order');
+    }
+
+    public function show($id)
+    {
+        $budget = Budget::findOrFail($id);
+
+        return view('admin.pages.order.show', compact('budget'));
     }
 
     public function edit($id)
@@ -81,7 +89,7 @@ class OrderController extends Controller
             return $el;
         });*/
 
-        return view('admin.pages.category.edit', compact('category', 'subcategory'));
+        return view('admin.pages.order.edit', compact('category', 'subcategory'));
     }
 
     public function update(Request $request, $id)
@@ -90,7 +98,7 @@ class OrderController extends Controller
         $category->update($request->all());
         $category->provider_subcategory()->sync($request->subcategory);
 
-        return redirect()->route('admin.category');
+        return redirect()->route('admin.order');
     }
 
     public function destroy($id)
@@ -104,6 +112,6 @@ class OrderController extends Controller
             //
         }
 
-        return redirect()->route('admin.category');
+        return redirect()->route('admin.order');
     }
 }

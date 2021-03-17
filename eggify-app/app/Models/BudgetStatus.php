@@ -9,6 +9,8 @@ class BudgetStatus extends Model
 {
     use HasFactory;
 
+    protected $table = 'budgets_status';
+
     protected $fillable = [
         'name',
     ];

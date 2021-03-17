@@ -18,21 +18,14 @@
                     <h6 class="card-title">@lang('admin.page.order.title')</h6>
                     <p class="card-description">@lang('admin.page.order.description')</p>
 
-                    <div class="mb-3 float-right">
-                        <a href="{{ route('admin.order.create') }}" class="btn btn-primary btn-icon-text">
-                            <i class="btn-icon-prepend" data-feather="plus"></i>
-                            @lang('global.general.create')
-                        </a>
-                    </div>
-
                     <div class="table-responsive">
                         <table id="dataTable" class="table">
                             <thead>
                             <tr>
                                 <th>@lang('admin.page.order.table.date')</th>
-                                <th>@lang('admin.page.order.table.user_from')</th>
-                                <th>@lang('admin.page.order.table.user_to')</th>
-                                <th>@lang('admin.page.order.table.message')</th>
+                                <th>@lang('admin.page.order.table.id')</th>
+                                <th>@lang('admin.page.order.table.user')</th>
+                                <th>@lang('admin.page.order.table.user')</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -66,12 +59,12 @@
                 },
                 columns: [
                     {data: 'date'},
+                    {data: 'budget_id'},
                     {data: 'userfrom'},
                     {data: 'userto'},
-                    {data: 'message'},
                     {data: 'action', orderable: false, searchable: false}
                 ],
-                initComplete: function(settings, json) {
+                initComplete: function (settings, json) {
                     feather.replace();
                 }
             });

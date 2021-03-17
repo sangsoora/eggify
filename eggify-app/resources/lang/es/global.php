@@ -18,6 +18,7 @@ return [
         'update' => 'Actualizar',
         'processing' => 'Procesando',
         'send' => 'Enviar',
+        'return' => 'Volver',
     ],
 
     'login' => [

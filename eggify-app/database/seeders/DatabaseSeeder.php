@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BudgetsStatusTableSeeder::class);
         $this->call(BudgetsTableSeeder::class);
         $this->call(BudgetsUsersTableSeeder::class);
+        $this->call(BudgetsMessagesTableSeeder::class);
         $this->call(OperatorsJobTableSeeder::class);
         $this->call(OperatorsJobTagTableSeeder::class);
         $this->call(OperatorsPositionTableSeeder::class);
