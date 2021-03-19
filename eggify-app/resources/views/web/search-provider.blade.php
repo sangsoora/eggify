@@ -9,7 +9,7 @@
         <h5 class="title-action mb-2 pl-4">¿Qué buscas?</h5>
         <div class="link-list">
             @foreach($categories as $i => $el)
-                <a href="{{ route('web.result', [ 'category' => $el->id ]) }}"><i class="la la-circle mr-3"></i><span>{{ $el->name }}</span></a>
+                <a href="{{ route('web.result', [ 'category' => $el->id ]) }}"><img class="category-icon" src="{{ $el->getUrlImageAttribute() }}" ><span>{{ $el->name }}</span></a>
                 <span class="separator"></span>
             @endforeach
         </div>

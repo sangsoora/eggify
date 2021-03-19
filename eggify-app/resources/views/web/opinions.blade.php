@@ -237,7 +237,7 @@
                     @foreach($ratingsProvider as $i => $el)
                         <div class="opinion">
                             <div class="row mb-2">
-                                <div class="col-3"><img class="rounded-circle" src="/assets/img/user.png"></div>
+                                <div class="col-3"><img class="rounded-circle" src="{{ $el->rating->user->operator->operator_company != null ? $el->rating->user->operator->operator_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}"></div>
                                 <div class="col-6 text">
                                     <span class="d-block title">{{ $el->rating->user->name }}</span>
                                     <span class="d-block">{{ $el->rating->user->operator->operator_position->name }}</span>

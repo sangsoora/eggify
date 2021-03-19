@@ -10,7 +10,7 @@
         <h5 class="title-action mb-2 pl-4">¿Qué buscas?</h5>
         <div class="link-list">
             @foreach($categories as $i => $el)
-                <a href="{{ route('web.result', [ 'category' => $el->id ]) }}"><i class="la la-circle mr-3"></i><span>{{ $el->name }}</span></a>
+                <a href="{{ route('web.result', [ 'category' => $el->id ]) }}"><img class="category-icon" src="{{ $el->getUrlImageAttribute() }}" ><span>{{ $el->name }}</span></a>
                 <span class="separator"></span>
             @endforeach
         </div>
@@ -71,11 +71,11 @@
         </section>
         <section class="container-fluid">
             <div class="d-flex card-custom card-custom-small mobile">
-                <div class="card text-center"><a href="{{ route('web.result') }}"><img class="radius shadow" src="assets/img/slider-providers.png"></a>
-                    <div class="card-body"><a class="card-link" href="{{ route('web.result') }}">Proveedores</a></div>
+                <div class="card text-center"><a href="javascript:void(0)" onclick="sidepopup.open(this)"><img class="radius shadow" src="assets/img/slider-providers.png"></a>
+                    <div class="card-body"><a class="card-link" href="javascript:void(0)" onclick="sidepopup.open(this)">Proveedores</a></div>
                 </div>
-                <div class="card text-center"><a href="{{ route('web.result') }}"><img class="radius shadow" src="assets/img/slider-blog.png"></a>
-                    <div class="card-body"><a class="card-link" href="{{ route('web.result') }}">Productores</a></div>
+                <div class="card text-center"><a href="javascript:void(0)" onclick="sidepopup.open(this)"><img class="radius shadow" src="assets/img/slider-blog.png"></a>
+                    <div class="card-body"><a class="card-link" href="javascript:void(0)" onclick="sidepopup.open(this)">Productores</a></div>
                 </div>
                 <div class="card text-center"><a href="https://community.eggify.net/"><img class="radius shadow" src="/assets/img/slider-comunity.png"></a>
                     <div class="card-body"><a class="card-link" href="https://community.eggify.net/">Comunidad</a></div>
@@ -136,9 +136,9 @@
             <h5 class="text-white mb-3 title-action">Servicios populares</h5>
             <div class="d-flex card-custom card-custom-small card-custom-icon">
                 @foreach($categories_featured as $i => $el)
-                    <div class="card">
+                    <div class="card d-flex align-items-center justify-content-center" style="min-height: 78px;min-width: 196px;">
                         <a href="{{ route('web.result', $el->id) }}">
-                            <button style="min-height: 78px;min-width: 196px;" class="btn btn-secondary btn-custom la-circle" type="button">{{ $el->name }}</button>
+                            <img  class="category-icon" src="{{ $el->getUrlImageAttribute() }}" >{{ $el->name }}
                         </a>
                     </div>
                 @endforeach
@@ -150,9 +150,9 @@
                 <h2>Servicios populares</h2>
                 <div class="d-flex justify-content-around">
                     @foreach($categories_featured as $i => $el)
-                        <div class="card">
+                        <div class="card d-flex align-items-center justify-content-center" style="min-height: 78px;min-width: 196px;">
                             <a href="{{ route('web.result', $el->id) }}">
-                                <button style="min-height: 78px;min-width: 196px;" class="btn btn-secondary btn-custom la-circle" type="button">{{ $el->name }}</button>
+                                <img  class="category-icon" src="{{ $el->getUrlImageAttribute() }}" >{{ $el->name }}
                             </a>
                         </div>
                     @endforeach

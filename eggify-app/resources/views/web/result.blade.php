@@ -2,6 +2,7 @@
 
 @section('content')
     @include('web.layout.sidebar')
+    @include('web.layout.sidebarlogin')
     <header class="header-small mobile">
         <div class="d-flex position-relative mb-2">
             <a class="link-icon" href="{{ route('web.search.provider') }}"><i class="la la-arrow-left mr-2"></i></a>
