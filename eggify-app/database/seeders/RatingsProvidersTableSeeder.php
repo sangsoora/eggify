@@ -21,8 +21,8 @@ class RatingsProvidersTableSeeder extends Seeder
         DB::table('ratings_providers')->truncate();
 
         $dt = Carbon::now();
-        DB::insert('insert into ratings_providers (id,provider_id,rating_id) values (?,?,?)', [1, 1, 1]);
-        DB::insert('insert into ratings_providers (id,provider_id,rating_id) values (?,?,?)', [2, 1, 2]);
+        //DB::insert('insert into ratings_providers (id,provider_id,rating_id) values (?,?,?)', [1, 1, 1]);
+        //DB::insert('insert into ratings_providers (id,provider_id,rating_id) values (?,?,?)', [2, 1, 2]);
 
         Schema::enableForeignKeyConstraints();
     }

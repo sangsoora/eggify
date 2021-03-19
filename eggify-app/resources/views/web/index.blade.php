@@ -71,11 +71,11 @@
         </section>
         <section class="container-fluid">
             <div class="d-flex card-custom card-custom-small mobile">
-                <div class="card text-center"><a href="{{ route('web.result') }}"><img class="radius shadow" src="assets/img/slider-providers.png"></a>
-                    <div class="card-body"><a class="card-link" href="{{ route('web.result') }}">Proveedores</a></div>
+                <div class="card text-center"><a href="{{ route('web.search.provider') }}"><img class="radius shadow" src="assets/img/slider-providers.png"></a>
+                    <div class="card-body"><a class="card-link" href="{{ route('web.search.provider') }}">Proveedores</a></div>
                 </div>
-                <div class="card text-center"><a href="{{ route('web.result') }}"><img class="radius shadow" src="assets/img/slider-blog.png"></a>
-                    <div class="card-body"><a class="card-link" href="{{ route('web.result') }}">Productores</a></div>
+                <div class="card text-center"><a href="{{ route('web.search.provider') }}"><img class="radius shadow" src="assets/img/slider-blog.png"></a>
+                    <div class="card-body"><a class="card-link" href="{{ route('web.search.provider') }}">Productores</a></div>
                 </div>
                 <div class="card text-center"><a href="https://community.eggify.net/"><img class="radius shadow" src="/assets/img/slider-comunity.png"></a>
                     <div class="card-body"><a class="card-link" href="https://community.eggify.net/">Comunidad</a></div>
@@ -106,7 +106,9 @@
             <div class="d-flex card-custom card-custom-big">
                 @foreach($providers as $i => $el)
                     <div class="card">
-                        <a href="{{ route('web.provider', $el->id) }}"><img class="radius" src="/assets/img/slider-providers.png"></a>
+                        <a href="{{ route('web.provider', $el->id) }}">
+                            <img class="radius" src="{{ $el->provider_company != null ? $el->provider_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}" alt="{{ $el->provider_company != null ? $el->provider_company->name : '' }}">
+                        </a>
                         <div class="card-body mt-2">
                             <a class="card-link title-action" href="{{ route('web.provider', $el->id) }}">
                                 <h5 class="title-action">{{ $el->name }}</h5>

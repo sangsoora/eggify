@@ -12,7 +12,7 @@
         </div>
         <div class="d-flex header-content">
             <div class="mr-3 profile-img">
-                <img src="/assets/img/video-maker.png" alt="{{ $user->provider->name }}">
+                <img src="{{ $user->provider->provider_company != null ? $user->provider->provider_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}" alt="{{ $user->provider->provider_company != null ? $user->provider->provider_company->name : '' }}">
             </div>
             <div class="align-self-center">
                 <h5 class="m-0">{{ $user->provider->name }}</h5>
@@ -40,7 +40,7 @@
     <main class="main-desktop">
         <div class="d-flex provider-header-desktop">
             <div class="mr-3 profile-img">
-                <img src="/assets/img/video-maker.png" alt="{{ $user->provider->name }}">
+                <img src="{{ $user->provider->provider_company != null ? $user->provider->provider_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}" alt="{{ $user->provider->provider_company != null ? $user->provider->provider_company->name : '' }}">
             </div>
             <div class="align-self-center">
                 <h5 class="m-0">{{ $user->provider->name }}</h5>
@@ -157,7 +157,9 @@
                     @foreach($user->provider->rating->take(2) as $i => $el)
                         <div class="opinion">
                             <div class="row mb-2">
-                                <div class="col-3"><img class="rounded-circle" src="/assets/img/user.png"></div>
+                                <div class="col-3">
+                                    <img class="rounded-circle" src="{{ $el->user->operator->operator_company != null ? $el->user->operator->operator_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}" alt="{{ $el->user->operator->operator_company != null ? $el->user->operator->operator_company->name : '' }}">
+                                </div>
                                 <div class="col-6 text">
                                     <span class="d-block title">{{ $el->user->name }}</span>
                                     <span class="d-block">{{ $el->user->operator->operator_position->name }}</span>

@@ -32,7 +32,9 @@
                 <div class="col-12">
                     <h5 class="title-action mb-3">Mi escaparate</h5>
                     <div class="row information">
-                        <div class="col-4 pr-0"><img src="/assets/img/video-maker.png"></div>
+                        <div class="col-4 pr-0">
+                            <img src="{{ $user->provider->provider_company != null ? $user->provider->provider_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}" alt="{{ $user->provider->provider_company != null ? $user->provider->provider_company->name : '' }}">
+                        </div>
                         <div class="col-7">
                             <h5 class="text-action mb-0">{{ $user->provider->name }}</h5>
 
@@ -190,7 +192,9 @@
                     @foreach($ratingsProvider as $i => $el)
                         <div class="opinion">
                             <div class="row mb-2">
-                                <div class="col-3"><img class="rounded-circle" src="/assets/img/user.png"></div>
+                                <div class="col-3">
+                                    <img class="rounded-circle" src="{{ $el->rating->user->operator->operator_company != null ? $el->rating->user->operator->operator_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}" alt="{{ $el->rating->user->operator->operator_company != null ? $el->rating->user->operator->operator_company->name : '' }}">
+                                </div>
                                 <div class="col-6 text">
                                     <span class="d-block title">{{ $el->rating->user->name }}</span>
                                     <span class="d-block">{{ $el->rating->user->operator->operator_position->name }}</span>
