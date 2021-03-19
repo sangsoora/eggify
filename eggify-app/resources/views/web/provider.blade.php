@@ -131,7 +131,7 @@
                             <p>No olvides que para poder solicitar un presupuesto y tener completo acceso a nuestra plataforma antes debes registrarte.</p>
                         </div>
                         <div class="modal-footer">
-                            <a class="btn btn-primary rounded-pill w-100 m-auto" role="button" href="{{ route('web.signup-client') }}">Registrarme ahora</a>
+                            <a class="btn btn-primary rounded-pill w-100 m-auto" href="{{ route('web.signup-client') }}">Registrarme ahora</a>
                         </div>
                     </div>
                 </div>
@@ -146,7 +146,7 @@
                             <p>No olvides que para poder contactar con el proveedor y tener completo acceso a nuestra plataforma antes debes registrarte.</p>
                         </div>
                         <div class="modal-footer">
-                            <a class="btn btn-primary rounded-pill w-100 m-auto" role="button" href="{{ route('web.signup-client') }}">Registrarme ahora</a>
+                            <a class="btn btn-primary rounded-pill w-100 m-auto" href="{{ route('web.signup-client') }}">Registrarme ahora</a>
                         </div>
                     </div>
                 </div>
@@ -265,7 +265,7 @@
                                     <p>No olvides que para poder dejar una nota y tener completo acceso a nuestra plataforma antes debes registrarte.</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <a class="btn btn-primary rounded-pill w-100 m-auto" role="button" href="{{ route('web.signup-client') }}">Registrarme ahora</a>
+                                    <a class="btn btn-primary rounded-pill w-100 m-auto" href="{{ route('web.signup-client') }}">Registrarme ahora</a>
                                 </div>
                             </div>
                         </div>

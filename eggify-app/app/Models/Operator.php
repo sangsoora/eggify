@@ -46,7 +46,7 @@ class Operator extends Model
 
     public function operator_position()
     {
-        return $this->hasOne(OperatorPosition::class, 'id');
+        return $this->belongsTo(OperatorPosition::class, 'operator_position_id');
     }
 
     public function operator_company()

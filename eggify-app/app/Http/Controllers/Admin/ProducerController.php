@@ -37,13 +37,13 @@ class ProducerController extends Controller
         return $datatables->of($query)
             ->addColumn('action', 'admin.pages.producer.partials.actions')
             ->editColumn('services', function ($q) {
-                return sprintf('%s / %s', $q->provider_category->name, $q->provider_subcategory->name);
+                return sprintf('%s / %s', $q->provider_category != null ? $q->provider_category->name : '', $q->provider_subcategory != null ? $q->provider_subcategory->name : '');
             })
             ->editColumn('orders', function ($q) {
                 return count($q->user->budget_received->all());
             })
             ->editColumn('plan', function ($q) {
-                return $q->provider_plan->name;
+                return $q->provider_plan != null ? $q->provider_plan->name : '';
             })
             ->rawColumns([0])
             ->make(true);

@@ -22,6 +22,7 @@ Route::group(['as' => 'web.'], function () {
     Route::get('/', 'Web\HomeController@index')->name('index');
     Route::get('/provider/{id}', 'Web\ProviderController@index')->name('provider');
     Route::get('/result/{category?}/{city?}', 'Web\ResultController@index')->name('result');
+    Route::get('/searcher/{query}', 'Web\ResultController@search')->name('result.search');
     Route::get('/opinions/{id}', 'Web\OpinionsController@index')->name('opinions');
     Route::get('/opinions/{id}/add', 'Web\OpinionsController@add')->name('opinions.add');
     Route::post('/opinions/{id}/add/store', 'Web\OpinionsController@addStore')->name('opinions.add.store');

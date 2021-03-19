@@ -83,6 +83,7 @@ Route::group(['middleware' => ['auth'], 'as' => 'admin.', 'prefix' => 'admin'], 
         Route::get('data', 'Admin\OrderController@data')->name('order.data');
         Route::get('create', 'Admin\OrderController@create')->name('order.create');
         Route::post('create', 'Admin\OrderController@store')->name('order.store');
+        Route::get('{id}', 'Admin\OrderController@show')->name('order.show');
         Route::get('edit/{id}', 'Admin\OrderController@edit')->name('order.edit');
         Route::put('update/{id}', 'Admin\OrderController@update')->name('order.update');
         Route::delete('destroy/{id}', 'Admin\OrderController@destroy')->name('order.destroy');

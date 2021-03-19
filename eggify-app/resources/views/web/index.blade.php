@@ -50,27 +50,32 @@
                 </div>
                 <div class="row text-center mobile">
                     <div class="col px-4">
-                        <h5 class="text-white mb-3">Queremos ayudarte</h5>
-                        <form id="home-searcher"><input class="border rounded-pill form-control form-control-sm" type="text" placeholder="¿Qué buscas?" readonly="">
-                            <button class="btn btn-primary rounded-pill" type="button" onclick="sidepopup.open()"><i class="la la-search px-3"></i></button>
-                        </form>
+                        <h5 class="text-white mb-3">Faster · Better · Stronger</h5>
+                        <div id="home-searcher" class="wp-search">
+                            <input class="border rounded-pill form-control form-control-sm" type="text" name="text-search" placeholder="¿Qué buscas?">
+                            <button class="btn btn-primary rounded-pill" type="button" onclick="sidepopup.open(this)"><i class="la la-search px-3"></i></button>
+                        </div>
                     </div>
                 </div>
                 <div class="row text-center banner-header-text-desktop">
                     <div class="col px-4">
                         <h3>Faster · Better · Stronger</h3>
                         <p class="text-white mb-3">Un centro profesional donde los operadores y<br>proveedores de F&B pueden encontrarse</p>
-                        <form class="col-6 offset-3 mt-5" id="home-searcher"><input class="border rounded-pill form-control form-control-sm" type="text" placeholder="¿Qué buscas?" readonly="">
-                            <button class="btn btn-primary rounded-pill" type="button" onclick="sidepopup.open()"><i class="la la-search px-3"></i></button>
-                        </form>
+                        <div class="wp-search col-6 offset-3 mt-5" id="home-searcher">
+                            <input class="border rounded-pill form-control form-control-sm" type="text" name="text-search" placeholder="¿Qué buscas?">
+                            <button class="btn btn-primary rounded-pill" type="button" onclick="sidepopup.open(this)"><i class="la la-search px-3"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
         <section class="container-fluid">
             <div class="d-flex card-custom card-custom-small mobile">
-                <div class="card text-center"><a href="javascript:void(0)" onclick="sidepopup.open()"><img class="radius shadow" src="/assets/img/slider-providers.png"></a>
-                    <div class="card-body"><a class="card-link" href="javascript:void(0)" onclick="sidepopup.open()">Proveedores</a></div>
+                <div class="card text-center"><a href="{{ route('web.result') }}"><img class="radius shadow" src="assets/img/slider-providers.png"></a>
+                    <div class="card-body"><a class="card-link" href="{{ route('web.result') }}">Proveedores</a></div>
+                </div>
+                <div class="card text-center"><a href="{{ route('web.result') }}"><img class="radius shadow" src="assets/img/slider-blog.png"></a>
+                    <div class="card-body"><a class="card-link" href="{{ route('web.result') }}">Productores</a></div>
                 </div>
                 <div class="card text-center"><a href="https://community.eggify.net/"><img class="radius shadow" src="/assets/img/slider-comunity.png"></a>
                     <div class="card-body"><a class="card-link" href="https://community.eggify.net/">Comunidad</a></div>
@@ -78,11 +83,11 @@
                 <div class="card card-end"></div>
             </div>
             <div class="d-flex card-custom card-custom-small-desktop">
-                <div class="card text-center"><a href="javascript:void(0)" onclick="sidepopup.open()"><img class="radius shadow" src="/assets/img/slider-providers.png"></a>
-                    <div class="card-body"><a class="card-link" href="javascript:void(0)" onclick="sidepopup.open()">Proveedores</a></div>
+                <div class="card text-center"><a href="javascript:void(0)" onclick="sidepopup.open(this)"><img class="radius shadow" src="assets/img/slider-providers.png"></a>
+                    <div class="card-body"><a class="card-link" href="javascript:void(0)" onclick="sidepopup.open(this)">Proveedores</a></div>
                 </div>
-                <div class="card text-center"><a href="javascript:void(0)" onclick="sidepopup.open()"><img class="radius shadow" src="/assets/img/slider-productores.svg"></a>
-                    <div class="card-body"><a class="card-link" href="javascript:void(0)" onclick="sidepopup.open()">Productores</a></div>
+                <div class="card text-center"><a href="javascript:void(0)" onclick="sidepopup.open(this)"><img class="radius shadow" src="assets/img/slider-productores.svg"></a>
+                    <div class="card-body"><a class="card-link" href="javascript:void(0)" onclick="sidepopup.open(this)">Productores</a></div>
                 </div>
                 <div class="card text-center"><a href="https://community.eggify.net/"><img class="radius shadow" src="/assets/img/slider-comunity.png"></a>
                     <div class="card-body"><a class="card-link" href="https://community.eggify.net/">Comunidad</a></div>

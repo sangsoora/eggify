@@ -26,17 +26,55 @@ class ResultController extends Controller
         $providers = Provider::with('provider_category', 'postal_code');
         $ratings_criteria = RatingCriteria::all();
 
-        if ($category) {
+        $category_selected = null;
+        if ($category && $category != 0) {
             $category_selected = ProviderCategory::where('id', $category)->firstOrFail();
             $providers = $providers->where('provider_category_id', $category);
         }
 
+        $city = null;
         if ($city) {
             $city_selected = City::where('id', $city)->firstOrFail();
             $providers = $providers->whereHas('postal_code', function ($query) use ($city) {
                 $query->where('city_id', $city);
             });
         }
+
+        // TODO [jojacafe]: order by rating category
+        if ($request->input('order')) {
+
+        }
+
+        $providers = $providers->get();
+
+        return view('web.result', compact('bodyClass', 'cities', 'states', 'city_selected', 'categories', 'category_selected', 'providers', 'ratings_criteria'));
+    }
+
+    public function search(Request $request, $query)
+    {
+        $bodyClass = 'page-sub';
+
+        $cities = City::all();
+        $city_selected = null;
+        $category_selected = null;
+        $states = State::all();
+        $ratings_criteria = RatingCriteria::all();
+        $categories = ProviderCategory::all();
+
+        $providers = Provider::with('provider_category', 'provider_subcategory', 'postal_code');
+
+        // Name provider
+        $providers->orWhere('name', 'like', '%' . $query . '%');
+
+        // Category
+        $providers->orWhereHas('provider_category', function($q) use($query){
+            $q->where('providers_category.name', 'like', '%' . $query . '%');
+        });
+
+        // Subcategory
+        $providers->orWhereHas('provider_subcategory', function($q) use($query){
+            $q->where('providers_subcategory.name', 'like', '%' . $query . '%');
+        });
 
         // TODO [jojacafe]: order by rating category
         if ($request->input('order')) {
