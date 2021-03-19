@@ -18,7 +18,7 @@
                     {!! Form::open(['method' => 'POST', 'route' => ['web.user.profile.update'], 'id' => 'edit-operator' ]) !!}
                     <div class="form-group input-text-icon"><input class="form-control" type="text" placeholder="Nombre" name="name" required="" value="{{ $user->operator->name }}"><i class="la la-briefcase"></i></div>
                     <div class="form-group input-text-icon"><input class="form-control" type="text" placeholder="Apellidos" name="surname" required="" value="{{ $user->operator->surname }}"><i class="la la-briefcase"></i></div>
-                    <div class="form-group input-text-icon"><input class="form-control" type="password" placeholder="Contraseña" name="password" value=""><i class="la la-eye"></i></div>
+                    <div class="form-group input-text-icon"><input class="form-control" type="password" placeholder="******" name="password" value=""><i class="la la-eye"></i></div>
                     <div class="form-group input-text-icon"><input class="form-control" type="email" placeholder="Email" required="" name="email" value="{{ $user->email }}"><i class="la la-envelope"></i></div>
                     <div class="form-group input-text-icon"><input class="form-control" type="tel" placeholder="Teléfono" required="" name="phone" value="{{ $user->operator->phone }}"><i class="la la-phone"></i></div>
                     <div class="form-group input-text-icon"><input class="form-control" type="text" placeholder="Ubicación" name="address" required="" value="{{ $user->operator->address }}"><i class="la la-map-marker"></i></div>

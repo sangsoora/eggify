@@ -116,6 +116,7 @@ class UserController extends Controller
         $request->merge([
             'user_id' => $user->id,
             'policy_consent' => $request->policy_consent != null && $request->policy_consent == 'on' ? 1 : 0,
+            'provider_plan_id' => 1,
             'postal_code_id' => 1
         ]);
 

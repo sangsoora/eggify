@@ -2,7 +2,10 @@
 
 @section('content')
     <header class="header-small">
-        <div class="d-flex position-relative mb-2"><a class="link-icon" href="{{ route('web.index') }}"><i class="la la-arrow-left mr-2"></i></a><a class="m-auto" href="{{ route('web.index') }}"><img src="/assets/img/logo-color.png"></a></div>
+        <div class="d-flex position-relative mb-2">
+            <a class="link-icon" href="{{ route('web.search.provider') }}"><i class="la la-arrow-left mr-2"></i></a>
+            <a class="m-auto" href="{{ route('web.index') }}"><img src="/assets/img/logo-color.png"></a>
+        </div>
     </header>
     <main>
         <section id="filters" class="container">
@@ -10,7 +13,7 @@
                 <div class="col">
                     <form>
                         <div class="position-relative mb-3">
-                            <h5 class="title-action mb-3">{{ $category_selected->name }}</h5>
+                            <h5 class="title-action mb-3">{{ $category_selected != null ? $category_selected->name : 'Todas las categorías' }}</h5>
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text"><i class="la la-map-marker"></i></span></div>
                                 <input class="form-control" type="text" readonly="" disabled="" value="{{ ($city_selected != null ? $city_selected->name : 'Seleccionar ciudad') }}">
@@ -21,20 +24,20 @@
                             <div id="select-option-location" class="select-option-custom">
                                 <ul class="list-unstyled">
                                     @foreach($cities as $i => $el)
-                                        <li style="cursor: pointer" data-link="{{ route('web.result', [ 'category' => $category_selected->id, 'city' => $el->id ]) }}">{{ $el->name }}</li>
+                                        <li style="cursor: pointer" data-link="{{ route('web.result', [ 'category' => $category_selected != null ? $category_selected->id : 0, 'city' => $el->id ]) }}">{{ $el->name }}</li>
                                     @endforeach
                                 </ul>
                             </div>
                         </div>
-                        <div class="pb-3">
+                        {{--<div class="pb-3">
                             <h5 class="title-action mb-3">Ordenar por mejor<i class="la la-angle-down pl-3"></i></h5>
                             <div>
                                 <button class="btn btn-secondary rounded-pill mr-3 my-1 active" type="button">Defecto<i class="la la-close pl-2"></i></button>
-                                {{--@foreach($ratings_criteria as $i => $el)
+                                --}}{{--@foreach($ratings_criteria as $i => $el)
                                     <button class="btn btn-secondary rounded-pill mr-3 my-1" type="button">{{ $el->name }}</button>
-                                @endforeach--}}
+                                @endforeach--}}{{--
                             </div>
-                        </div>
+                        </div>--}}
                     </form>
                 </div>
             </div>
@@ -126,7 +129,7 @@
                                             <p>No olvides que para poder dejar una nota y tener completo acceso a nuestra plataforma antes debes registrarte.</p>
                                         </div>
                                         <div class="modal-footer">
-                                            <button class="btn btn-primary rounded-pill w-100 m-auto" type="button">Registrarme ahora</button>
+                                            <a class="btn btn-primary rounded-pill w-100 m-auto" href="{{ route('web.signup-client') }}">Registrarme ahora</a>
                                         </div>
                                     </div>
                                 </div>
@@ -142,7 +145,7 @@
                     <h5 class="title-action mb-3">Provincias cercanas</h5>
                     <ul class="list-unstyled list-custom">
                         @foreach($states as $i => $el)
-                            <li class="d-flex" style="cursor: pointer" onclick="window.location.href='{{ route('web.result', [ 'category' => $category_selected->id, 'city' => $el->id ]) }}'"><span class="mr-auto">{{ $el->name }}</span><span>{{ $el->city->first()->postal_code->first()->provider->count() }}</span></li>
+                            <li class="d-flex" style="cursor: pointer" onclick="window.location.href='{{ route('web.result', [ 'category' => $category_selected != null ? $category_selected->id : 0, 'city' => $el->id ]) }}'"><span class="mr-auto">{{ $el->name }}</span><span>{{ $el->city->first()->postal_code->first()->provider->count() }}</span></li>
                         @endforeach
                     </ul>
                 </div>
