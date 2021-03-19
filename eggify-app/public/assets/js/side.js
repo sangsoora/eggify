@@ -26,7 +26,7 @@ var sidepopup = {
 
         if (!!$inputsearch.val()) {
 
-            window.location.href = '/search/' + $inputsearch.val();
+            window.location.href = '/searcher/' + $inputsearch.val();
 
         } else {
 
