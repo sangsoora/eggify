@@ -48,7 +48,7 @@
                         <h3>Faster · Better · Stronger</h3>
                         <p class="text-white mb-3">Un centro profesional donde los operadores y<br>proveedores de F&B pueden encontrarse</p>
                         @if (!(auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser()))
-                            <button class="btn btn-secondary rounded-pill w-50 mt-5" type="button">¡Regístrate ahora!</button>
+                            <a class="btn btn-secondary rounded-pill w-50 mt-5" role="button" href="{{ route('web.signup-client') }}">¡Regístrate ahora!</a>
                         @endif
                     </div>
                 </div>

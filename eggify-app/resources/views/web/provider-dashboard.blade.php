@@ -62,7 +62,7 @@
             </div>
         </section>
         <hr>
-        <section id="opinions-rating" class="container">
+        <section id="opinions-rating" class="container mobile">
             <div class="row">
                 <div class="col-12">
                     <h5 class="title-action text-center mb-3">Valoraciones</h5>
@@ -90,6 +90,43 @@
             </div>
             <div class="row mt-3">
                 <div class="col-12">
+                    <ul class="list-unstyled mb-0">
+                        @foreach($ratingsCriteria as $i => $el)
+                            <li class="d-flex"><span class="mr-auto">{{ $el->name }}</span>
+                                <div class="rating">
+                                <span class="stars">
+                                    <span class="{{ ($el->rating > 0 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                                    <span class="{{ ($el->rating > 1 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                                    <span class="{{ ($el->rating > 2 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                                    <span class="{{ ($el->rating > 3 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                                    <span class="{{ ($el->rating > 4 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                                </span>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section id="opinions-rating" class="container rating-desktop">
+            <h5 class="title-action text-center mb-3">Valoraciones</h5>
+            <div class="d-flex justify-content-between">
+                <div class="rating-avg">
+                    <div class="rating rating-total">
+                        <span class="text">
+                            {{ round($user->provider->rating->avg('rating'), 2) }}
+                        </span>
+                        <span class="stars">
+                            <span class="{{ ($user->provider->rating->avg('rating') > 0 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                            <span class="{{ ($user->provider->rating->avg('rating') > 1 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                            <span class="{{ ($user->provider->rating->avg('rating') > 2 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                            <span class="{{ ($user->provider->rating->avg('rating') > 3 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                            <span class="{{ ($user->provider->rating->avg('rating') > 4 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="rating-detail">
+                    <h5 class="title-action">{{ sprintf('%s %s de %s', $user->provider->rating->count(), ($user->provider->rating->count() == 1 ? 'opinión' : 'opiniones'), $user->provider->name) }}</h5>
                     <ul class="list-unstyled mb-0">
                         @foreach($ratingsCriteria as $i => $el)
                             <li class="d-flex"><span class="mr-auto">{{ $el->name }}</span>
