@@ -4,7 +4,7 @@
     @include('web.layout.sidebar')
     <div id="sidepopup" class="sidepopup">
         <div class="d-flex closebtn pb-2">
-            <button class="btn mr-auto p-0" type="button" onclick="sidepopup.close()"><img src="assets/img/logo-color.png"></button>
+            <button class="btn mr-auto p-0" type="button" onclick="sidepopup.close()"><img src="/assets/img/logo-color.png"></button>
             <button class="btn p-0" type="button" onclick="sidepopup.close()"><i class="fa fa-close mr-2"></i></button>
         </div>
         <h5 class="title-action mb-2 pl-4">¿Qué buscas?</h5>
@@ -29,23 +29,24 @@
         <div class="p-2">
             <button class="btn mr-auto p-0" type="button"><a href="/"><img src="/assets/img/logo-color.png"></a></button>
         </div>
-        <div class="p-2 align-self-center">
+        <div class="p-2 align-self-center nav-menu-desktop">
           <a href="{{ route('web.about') }}" class="mr-5">Sobre nosotros</a>
           <a href="{{ route('web.search.provider') }}" class="mr-5">Proveedores</a>
           @if (auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser())
-              <a href="#" class="mr-5">Inbox</a>
+              <a href="{{ route('web.inbox') }}" class="mr-5">Inbox</a>
           @endif
           <a href="https://community.eggify.net/" class="mr-5">Comunidad</a>
         </div>
         @if (!(auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser()))
             <div id="header-links" class="p-2 align-self-center"><a href="javascript:void(0)" onclick="sidepopuplogin.open()">Acceder</a><span class="mx-1">/</span><a href="javascript:void(0)" onclick="sidepopuplogin.open()">Regístrate</a></div>
         @endif
+        <button class="btn btn-nav" type="button" onclick="sidenav.open()"><i class="far fa-user"></i></button>
     </header>
     <main>
         <section id="banner-header">
             <div class="container">
                 <div class="row mb-3">
-                    <div class="col"><a href="/"><img class="d-block m-auto logo" src="assets/img/logo.png" alt="logo"></a></div>
+                    <div class="col"><a href="/"><img class="d-block m-auto logo" src="/assets/img/logo.png" alt="logo"></a></div>
                 </div>
                 <div class="row text-center mobile">
                     <div class="col px-4">
@@ -76,7 +77,7 @@
                 <div class="card text-center"><a href="{{ route('web.result') }}"><img class="radius shadow" src="assets/img/slider-blog.png"></a>
                     <div class="card-body"><a class="card-link" href="{{ route('web.result') }}">Productores</a></div>
                 </div>
-                <div class="card text-center"><a href="https://community.eggify.net/"><img class="radius shadow" src="assets/img/slider-comunity.png"></a>
+                <div class="card text-center"><a href="https://community.eggify.net/"><img class="radius shadow" src="/assets/img/slider-comunity.png"></a>
                     <div class="card-body"><a class="card-link" href="https://community.eggify.net/">Comunidad</a></div>
                 </div>
                 <div class="card card-end"></div>
@@ -88,10 +89,10 @@
                 <div class="card text-center"><a href="javascript:void(0)" onclick="sidepopup.open(this)"><img class="radius shadow" src="assets/img/slider-productores.svg"></a>
                     <div class="card-body"><a class="card-link" href="javascript:void(0)" onclick="sidepopup.open(this)">Productores</a></div>
                 </div>
-                <div class="card text-center"><a href="https://community.eggify.net/"><img class="radius shadow" src="assets/img/slider-comunity.png"></a>
+                <div class="card text-center"><a href="https://community.eggify.net/"><img class="radius shadow" src="/assets/img/slider-comunity.png"></a>
                     <div class="card-body"><a class="card-link" href="https://community.eggify.net/">Comunidad</a></div>
                 </div>
-                <div class="card text-center"><a href=""><img class="radius shadow" src="assets/img/slider-blog.png"></a>
+                <div class="card text-center"><a href=""><img class="radius shadow" src="/assets/img/slider-blog.png"></a>
                     <div class="card-body"><a class="card-link" href="">Blog</a></div>
                 </div>
             </div>
@@ -164,7 +165,7 @@
               <h2 class="title-action mb-3">Productos destacados</h2>
             </div>
             <div class="d-flex card-custom card-custom-big">
-                <div class="card"><a href="#"><img class="radius" src="assets/img/wine.jpg"></a>
+                <div class="card"><a href="#"><img class="radius" src="/assets/img/wine.jpg"></a>
                     <div class="card-body mt-2"><a class="card-link" href="#">
                             <h5 class="title-action">Marca de Vino</h5>
                         </a>
@@ -183,7 +184,7 @@
                             <button class="btn btn-secondary form-control rounded-pill mt-3" type="button">Más información</button>
                         </a></div>
                 </div>
-                <div class="card"><a href="#"><img class="radius" src="assets/img/wines.jpg"></a>
+                <div class="card"><a href="#"><img class="radius" src="/assets/img/wines.jpg"></a>
                     <div class="card-body mt-2"><a class="card-link" href="#">
                             <h5 class="title-action">Marca de Vino</h5>
                         </a>
@@ -202,7 +203,7 @@
                             <button class="btn btn-secondary form-control rounded-pill mt-3" type="button">Más información</button>
                         </a></div>
                 </div>
-                <div class="card"><a href="#"><img class="radius" src="assets/img/white-wine.jpg"></a>
+                <div class="card"><a href="#"><img class="radius" src="/assets/img/white-wine.jpg"></a>
                     <div class="card-body mt-2"><a class="card-link" href="#">
                             <h5 class="title-action">Marca de Vino</h5>
                         </a>

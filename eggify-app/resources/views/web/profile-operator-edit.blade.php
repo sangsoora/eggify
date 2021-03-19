@@ -1,7 +1,7 @@
 @extends('web.layout.master')
 
 @section('content')
-    <header class="header-oval">
+    <header class="header-oval mobile">
         <div class="bg-custom-oval"></div>
         <div class="d-flex header-content position-relative mb-2"><a class="link-icon" href="{{ route('web.user.profile') }}"><i class="la la-arrow-left"></i></a>
             <div class="m-auto text-center profile-img"><img src="{{ $user->operator->operator_company != null ? $user->operator->operator_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}" alt="{{ $user->operator->operator_company != null ? $user->operator->operator_company->name : '' }}">
@@ -9,7 +9,23 @@
             </div>
         </div>
     </header>
-    <main>
+    <header class="d-flex header-opacity justify-content-between" id="header-desktop">
+        <div class="p-2">
+            <button class="btn mr-auto p-0" type="button"><a href="/"><img src="/assets/img/logo-color.png"></a></button>
+        </div>
+        <div class="p-2 align-self-center nav-menu-desktop">
+          <a href="{{ route('web.about') }}" class="mr-5">Sobre nosotros</a>
+          <a href="{{ route('web.search.provider') }}" class="mr-5">Proveedores</a>
+          @if (auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser())
+              <a href="{{ route('web.inbox') }}" class="mr-5">Inbox</a>
+          @endif
+          <a href="https://community.eggify.net/" class="mr-5">Comunidad</a>
+        </div>
+        @if (!(auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser()))
+            <div id="header-links" class="p-2 align-self-center"><a href="javascript:void(0)" onclick="sidepopuplogin.open()">Acceder</a><span class="mx-1">/</span><a href="javascript:void(0)" onclick="sidepopuplogin.open()">Regístrate</a></div>        @endif
+        <button class="btn btn-nav" type="button" onclick="sidenav.open()"><i class="far fa-user"></i></button>
+    </header>
+    <main class="main-desktop">
         <section class="container">
             <div class="row">
                 <div class="col-12">

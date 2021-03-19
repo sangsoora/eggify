@@ -44,5 +44,21 @@ class Helper
 
         return $image;
     }
+    public static function saveIcon($file, $path, $filename, $width = 36, $height = 36, $option = 'resize')
+    {
+        $image = Image::make($file)->widen($width);
+
+        switch ($option) {
+            default:
+                $image->resize($width, $height, function ($constraint) use ($height, $width) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+                break;
+        }
+        Storage::disk(getDisk())->put($path . $filename, (string) $image->encode());
+
+        return $image;
+    }
 
 }

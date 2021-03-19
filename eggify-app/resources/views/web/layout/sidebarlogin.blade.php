@@ -1,7 +1,7 @@
 <div id="sidepopup-login" class="sidepopup">
     <div class="d-flex closebtn position-relative pb-2">
         <button class="btn btn-nav" type="button" onclick="sidenav.open()"><i class="la la-navicon"></i></button>
-        <button class="btn m-auto p-0" type="button" onclick="sidepopuplogin.close()"><img src="assets/img/logo-color.png"></button>
+        <button class="btn m-auto p-0" type="button" onclick="sidepopuplogin.close()"><img src="/assets/img/logo-color.png"></button>
     </div>
     <section class="container">
         <div class="row mb-3">
