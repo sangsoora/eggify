@@ -136,7 +136,13 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Authentication passed...
-            return redirect()->route('web.index');
+            $user = User::findOrFail(auth()->user()->id);
+            if ($user->isProvider()) {
+                return redirect()->route('web.provider-dashboard');
+            } else {
+                return redirect()->route('web.index');
+            }
+            // return redirect()->route('web.index');
         }
 
         return redirect()->route('web.index');

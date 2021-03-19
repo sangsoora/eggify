@@ -1,10 +1,27 @@
 @extends('web.layout.master')
 
 @section('content')
-    <header class="header-small">
+    @include('web.layout.sidebar')
+    <header class="header-small mobile">
         <div class="d-flex position-relative mb-2"><a class="link-icon" href="{{ route('web.provider', $provider->id) }}"><i class="la la-arrow-left mr-2"></i></a><a class="m-auto" href="{{ route('web.index') }}"><img src="/assets/img/logo-color.png"></a></div>
     </header>
-    <main>
+    <header class="d-flex header-opacity justify-content-between" id="header-desktop">
+        <div class="p-2">
+            <button class="btn mr-auto p-0" type="button"><a href="/"><img src="/assets/img/logo-color.png"></a></button>
+        </div>
+        <div class="p-2 align-self-center nav-menu-desktop">
+          <a href="{{ route('web.about') }}" class="mr-5">Sobre nosotros</a>
+          <a href="{{ route('web.search.provider') }}" class="mr-5">Proveedores</a>
+          @if (auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser())
+              <a href="{{ route('web.inbox') }}" class="mr-5">Inbox</a>
+          @endif
+          <a href="https://community.eggify.net/" class="mr-5">Comunidad</a>
+        </div>
+        @if (!(auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser()))
+            <div id="header-links" class="p-2 align-self-center"><a href="javascript:void(0)" onclick="sidepopuplogin.open()">Acceder</a><span class="mx-1">/</span><a href="javascript:void(0)" onclick="sidepopuplogin.open()">Regístrate</a></div>        @endif
+        <button class="btn btn-nav" type="button" onclick="sidenav.open()"><i class="far fa-user"></i></button>
+    </header>
+    <main class="main-desktop">
         <section>
             <div class="card">
                 {{--<span class="tag">Premium</span>
@@ -23,7 +40,7 @@
                         <li data-target="#" data-slide-to="2"></li>
                     </ol>
                 </div>
-                <div class="card-body">
+                <div class="card-body mobile">
                     <h4 class="card-title">{{ $provider->name }}</h4>
                     <div class="rating">
                         <span class="mr-1">{{ round($provider->rating->avg('rating'), 2) }}</span>
@@ -46,6 +63,43 @@
                         <button class="btn btn-secondary rounded-pill icon mr-1" type="button" data-toggle="modal" data-target="#register-modal-contact"><i class="la la-envelope"></i></button>
                     @endif
                     <button class="btn btn-secondary rounded-pill icon" type="button" data-toggle="modal" data-target="#register-modal-phone"><i class="la la-phone"></i></button>--}}
+                </div>
+                <div class="card-body card-body-desktop">
+                    <div class="card-detail-columns">
+                        <div class="d-flex justify-content-between">
+                            <h4 class="card-title">{{ $provider->name }}</h4>
+                            <div class="rating">
+                                <span class="mr-1">{{ round($provider->rating->avg('rating'), 2) }}</span>
+                                <span class="mr-1">
+                                    <span class="{{ ($provider->rating->avg('rating') > 0 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                                    <span class="{{ ($provider->rating->avg('rating') > 1 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                                    <span class="{{ ($provider->rating->avg('rating') > 2 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                                    <span class="{{ ($provider->rating->avg('rating') > 3 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                                    <span class="{{ ($provider->rating->avg('rating') > 4 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                                </span>
+                                <span>{{ sprintf('%s %s', $provider->rating->count(), ($provider->rating->count() == 1 ? 'Opinión' : 'Opiniones')) }}</span>
+                            </div>
+                        </div>
+                        <p class="card-text"><i class="la la-map-marker mr-2"></i>{{ $provider->postal_code->city->name }}</p>
+                        <p class="card-text">{{ ($provider->provider_type->name == 'distributor' ? 'Distribuidor' : 'Productor') }}</p>
+                    </div>
+                    <div class="card-detail-columns text-center px-5">
+                        {{--@if (auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser())
+                            <div>
+                                <button class="btn btn-primary rounded-pill mb-4 w-100" type="button" data-toggle="modal" data-target="#message-modal" data-userto="{{ $provider->user_id }}">Solicitar presupuesto</button>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-secondary rounded-pill icon" style="width: 45%;" type="button" data-toggle="modal" data-target="#message-modal" data-userto="{{ $provider->user_id }}"><i class="la la-envelope mr-2"></i>Enviar mensaje</button>
+                        @else
+                            <div>
+                                <button class="btn btn-primary rounded-pill mb-4 w-100" type="button" data-toggle="modal" data-target="#register-modal-budget">Solicitar presupuesto</button>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-secondary rounded-pill icon" style="width: 45%;" type="button" data-toggle="modal" data-target="#register-modal-contact"><i class="la la-envelope mr-2"></i>Enviar mensaje</button>
+                        @endif
+                        <button class="btn btn-secondary rounded-pill icon" style="width: 45%;" type="button" data-toggle="modal" data-target="#register-modal-phone"><i class="la la-phone mr-2"></i>Ver teléfono</button>--}}
+                      </div>
+                    </div>
                 </div>
             </div>
             <div class="modal fade" role="dialog" tabindex="-1" id="register-modal-budget">
@@ -94,7 +148,7 @@
                 </div>
             </div>
         </section>
-        <section id="opinions-rating" class="container">
+        <section id="opinions-rating" class="container mobile">
             <div class="row">
                 <div class="col-4">
                     <div class="rating rating-total">
@@ -134,8 +188,45 @@
                 </div>
             </div>
         </section>
+        <section id="opinions-rating" class="container rating-desktop">
+            <h5 class="title-action">Opiniones</h5>
+            <div class="d-flex justify-content-between">
+                <div class="rating-avg">
+                    <div class="rating rating-total">
+                        <span class="text">
+                            {{ round($provider->rating->avg('rating'), 2) }}
+                        </span>
+                        <span class="stars">
+                            <span class="{{ ($provider->rating->avg('rating') > 0 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                            <span class="{{ ($provider->rating->avg('rating') > 1 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                            <span class="{{ ($provider->rating->avg('rating') > 2 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                            <span class="{{ ($provider->rating->avg('rating') > 3 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                            <span class="{{ ($provider->rating->avg('rating') > 4 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="rating-detail">
+                    <h5 class="title-action">{{ sprintf('%s %s de %s', $provider->rating->count(), ($provider->rating->count() == 1 ? 'opinión' : 'opiniones'), $provider->name) }}</h5>
+                    <ul class="list-unstyled mb-0">
+                        @foreach($ratingsCriteria as $i => $el)
+                            <li class="d-flex"><span class="mr-auto">{{ $el->name }}</span>
+                                <div class="rating">
+                                <span class="stars">
+                                    <span class="{{ ($el->rating > 0 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                                    <span class="{{ ($el->rating > 1 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                                    <span class="{{ ($el->rating > 2 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                                    <span class="{{ ($el->rating > 3 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                                    <span class="{{ ($el->rating > 4 ? 'fa fa-star checked' : 'fa fa-star') }}"></span>
+                                </span>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </section>
         <section id="opinions" class="container">
-            <div class="row">
+            <div class="row mobile">
                 <div class="col-12">
                     <h5 class="title-action">Opiniones</h5>
                 </div>

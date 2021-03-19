@@ -1,6 +1,7 @@
 @extends('web.layout.master')
 
 @section('content')
+    @include('web.layout.sidebar')
     <header class="header-small mobile">
         <div class="d-flex position-relative"><a class="link-icon" href="{{ route('web.result', [ 'category' => $provider->provider_category->id, 'city' => $provider->postal_code->city->id ]) }}"><i class="la la-arrow-left mr-2"></i></a><a class="m-auto" href="{{ route('web.index') }}"><img src="/assets/img/logo-color.png"></a></div>
         <div class="nav-anchor mt-3"><a class="active" href="#information">Información</a><a href="#photos">Fotos</a><a href="#opinions-rating">Opiniones</a><a href="#map">Mapa</a></div>
@@ -9,17 +10,18 @@
         <div class="p-2">
             <button class="btn mr-auto p-0" type="button"><a href="/"><img src="/assets/img/logo-color.png"></a></button>
         </div>
-        <div class="p-2 align-self-center">
+        <div class="p-2 align-self-center nav-menu-desktop">
           <a href="{{ route('web.about') }}" class="mr-5">Sobre nosotros</a>
           <a href="{{ route('web.search.provider') }}" class="mr-5">Proveedores</a>
           @if (auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser())
-              <a href="#" class="mr-5">Inbox</a>
+              <a href="{{ route('web.inbox') }}" class="mr-5">Inbox</a>
           @endif
           <a href="https://community.eggify.net/" class="mr-5">Comunidad</a>
         </div>
         @if (!(auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser()))
             <div id="header-links" class="p-2 align-self-center"><a href="javascript:void(0)" onclick="sidepopuplogin.open()">Acceder</a><span class="mx-1">/</span><a href="javascript:void(0)" onclick="sidepopuplogin.open()">Regístrate</a></div>
         @endif
+        <button class="btn btn-nav" type="button" onclick="sidenav.open()"><i class="far fa-user"></i></button>
     </header>
     <div class="nav-anchor anchor-desktop"><a class="active" href="#information">Información</a><a href="#photos">Fotos</a><a href="#opinions-rating">Opiniones</a><a href="#map">Mapa</a></div>
     <main>
@@ -90,15 +92,15 @@
                                 <button class="btn btn-primary rounded-pill mb-4 w-100" type="button" data-toggle="modal" data-target="#message-modal" data-userto="{{ $provider->user_id }}">Solicitar presupuesto</button>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <button class="btn btn-secondary rounded-pill icon" style="width: 45%;" type="button" data-toggle="modal" data-target="#message-modal" data-userto="{{ $provider->user_id }}"><i class="la la-envelope"></i>Enviar mensaje</button>
+                                <button class="btn btn-secondary rounded-pill icon" style="width: 45%;" type="button" data-toggle="modal" data-target="#message-modal" data-userto="{{ $provider->user_id }}"><i class="la la-envelope mr-2"></i>Enviar mensaje</button>
                         @else
                             <div>
                                 <button class="btn btn-primary rounded-pill mb-4 w-100" type="button" data-toggle="modal" data-target="#register-modal-budget">Solicitar presupuesto</button>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <button class="btn btn-secondary rounded-pill icon" style="width: 45%;" type="button" data-toggle="modal" data-target="#register-modal-contact"><i class="la la-envelope"></i>Enviar mensaje</button>
+                                <button class="btn btn-secondary rounded-pill icon" style="width: 45%;" type="button" data-toggle="modal" data-target="#register-modal-contact"><i class="la la-envelope mr-2"></i>Enviar mensaje</button>
                         @endif
-                        <button class="btn btn-secondary rounded-pill icon" style="width: 45%;" type="button" data-toggle="modal" data-target="#register-modal-phone"><i class="la la-phone"></i>Ver teléfono</button>
+                        <button class="btn btn-secondary rounded-pill icon" style="width: 45%;" type="button" data-toggle="modal" data-target="#register-modal-phone"><i class="la la-phone mr-2"></i>Ver teléfono</button>
                       </div>
                     </div>
                 </div>
@@ -129,7 +131,7 @@
                             <p>No olvides que para poder solicitar un presupuesto y tener completo acceso a nuestra plataforma antes debes registrarte.</p>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-primary rounded-pill w-100 m-auto" type="button">Registrarme ahora</button>
+                            <a class="btn btn-primary rounded-pill w-100 m-auto" role="button" href="{{ route('web.signup-client') }}">Registrarme ahora</a>
                         </div>
                     </div>
                 </div>
@@ -144,7 +146,7 @@
                             <p>No olvides que para poder contactar con el proveedor y tener completo acceso a nuestra plataforma antes debes registrarte.</p>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-primary rounded-pill w-100 m-auto" type="button">Registrarme ahora</button>
+                            <a class="btn btn-primary rounded-pill w-100 m-auto" role="button" href="{{ route('web.signup-client') }}">Registrarme ahora</a>
                         </div>
                     </div>
                 </div>
@@ -227,7 +229,7 @@
                                     <p>No olvides que para poder enviarte el catalogo y tener completo acceso a nuestra plataforma antes debes registrarte.</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-primary rounded-pill w-100 m-auto" type="button">Registrarme ahora</button>
+                                    <a class="btn btn-primary rounded-pill w-100 m-auto" role="button" href="{{ route('web.signup-client') }}">Registrarme ahora</a>
                                 </div>
                             </div>
                         </div>
@@ -263,7 +265,7 @@
                                     <p>No olvides que para poder dejar una nota y tener completo acceso a nuestra plataforma antes debes registrarte.</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-primary rounded-pill w-100 m-auto" type="button">Registrarme ahora</button>
+                                    <a class="btn btn-primary rounded-pill w-100 m-auto" role="button" href="{{ route('web.signup-client') }}">Registrarme ahora</a>
                                 </div>
                             </div>
                         </div>

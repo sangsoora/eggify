@@ -996,7 +996,7 @@ main, .sidenav, .side {
     cursor: pointer;
 }
 
-#header-desktop, .banner-header-text-desktop, .card-custom-small-desktop, .title-desktop, .banner-middle, .banner-bottom, .footer-desktop, .anchor-desktop, .card-body-desktop, .provider-infos-desktop, .rating-desktop {
+#header-desktop, .banner-header-text-desktop, .card-custom-small-desktop, .title-desktop, .banner-middle, .banner-bottom, .footer-desktop, .anchor-desktop, .card-body-desktop, .provider-infos-desktop, .rating-desktop, .provider-header-desktop {
   display: none !important;
 }
 
@@ -1042,6 +1042,9 @@ main, .sidenav, .side {
   }
   #header-desktop img {
     width: 150px;
+  }
+  .main-desktop {
+    margin-top: 76px;
   }
   #banner-header {
     background: url(../../assets/img/kitchen.svg);
@@ -1133,7 +1136,7 @@ main, .sidenav, .side {
     border-bottom: 2px solid #4489E9;
   }
   body.page-provider main {
-    padding-top: 0;
+    padding-top: 0 !important;
   }
   .card-body-desktop {
     width: 100%;
@@ -1173,6 +1176,31 @@ main, .sidenav, .side {
   }
   .list-unstyled li {
     flex: 0 0 33%;
+  }
+  .list-unstyled li .rating {
+    flex: 0 0 35%;
+  }
+  .btn.btn-nav {
+    color: #4489E9;
+  }
+  .nav-menu-desktop {
+    flex: 1 0 25%;
+    margin-left: 10vw;
+  }
+  .provider-header-desktop {
+    display: block !important;
+    margin-top: 76px;
+    width: 70%;
+    margin: 0 auto;
+    padding: 15px 0 0;
+    position: relative;
+    text-align: center;
+  }
+  .provider-header-desktop img {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    margin-bottom: 2rem;
   }
 }
 
