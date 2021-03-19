@@ -79,7 +79,12 @@ class CategoryController extends Controller
         $category = ProviderCategory::findOrFail($id);
         $category->update($request->all());
         $category->provider_subcategory()->sync($request->subcategory);
-
+        if ($request->hasFile('icon')) {
+            $filename = $request->icon->getClientOriginalName();
+            $category->update(array('icon' => $filename));
+            // Upload image
+            $image = Helper::saveIcon($request->icon, "/category/" . $id . "/", $filename);
+        }
         return redirect()->route('admin.category');
     }
 

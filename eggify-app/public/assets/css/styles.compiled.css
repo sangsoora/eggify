@@ -885,9 +885,9 @@ main, .sidenav, .side {
   color: #4489E9;
   font-size: 28px;
 }
-.sidepopup .link-list a span {
+/*.sidepopup .link-list a span {
   vertical-align: text-bottom;
-}
+}*/
 .sidepopup .closebtn {
   margin-bottom: 15px;
   padding: 0 15px 0;
@@ -1002,6 +1002,12 @@ main, .sidenav, .side {
 
 .form-control.with-border {
   border: 1px solid #4A4A4A !important;;
+}
+
+.category-icon {
+  width: 2rem !important;
+  height: 2rem !important;
+  margin-right: 1rem;
 }
 
 @media screen and (max-height: 450px) {
@@ -1208,6 +1214,11 @@ main, .sidenav, .side {
   }
   .desktop-title {
     height: 60px;
+  }
+  #results .card-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2rem;
   }
 }
 

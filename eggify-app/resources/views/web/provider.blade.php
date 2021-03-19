@@ -172,8 +172,20 @@
         <section class="container">
             <div class="row">
                 <div class="col-12 mobile">
-                    <h5 class="title-action mb-3">Información sobre {{ $provider->name }}</h5>
-                    <p>{{ $provider->description }}</p>
+                    <h5 class="title-action mb-3">¿Quiénes sois?</h5>
+                    <p>{{ $provider->about }}</p>
+                    <h5 class="title-action mb-3">Municipio donde estáis ubicados</h5>
+                    <p>{{ $provider->municipality }}</p>
+                    <div id="hidden-detail" style="display: none;">
+                        <h5 class="title-action mb-3">Localizaciones donde operáis</h5>
+                        <p>{{ $provider->location }}</p>
+                        <h5 class="title-action mb-3">¿Cuándo empezasteis en el mercado?</h5>
+                        <p>{{ date('d/m/Y', strtotime($provider->starting))  }}</p>
+                        <h5 class="title-action mb-3">¿A qué os dedicáis?</h5>
+                        <p>{{ $provider->description }}</p>
+                        <h5 class="title-action mb-3">¿Cuál es vuestra propuesta de valor (USP)?</h5>
+                        <p>{{ $provider->usp }}</p>
+                    </div>
                 </div>
                 <div class="col-12 provider-infos-desktop">
                     <div class="provider-infos">
@@ -202,8 +214,8 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center">
-                <a class="btn btn-secondary rounded-pill w-50" href="#">Mostrar más detalles</a>
+            <div class="text-center mobile">
+                <a class="btn btn-secondary rounded-pill w-50" id="show-detail-btn" href="#">Mostrar más detalles</a>
             </div>
             {{--<div class="row">
                 <div class="col">
@@ -444,7 +456,18 @@
 @push('custom-scripts')
     <script type="text/javascript">
         $(document).ready(function () {
+            document.getElementById('show-detail-btn').addEventListener('click', (e) => {
+              console.log('hola');
+                e.preventDefault();
+                if (document.getElementById('hidden-detail').style.display == 'block') {
+                    document.getElementById('hidden-detail').style.display = 'none';
+                    document.getElementById('show-detail-btn').innerHTML = 'Mostrar más detalles';
+                } else {
+                    document.getElementById('hidden-detail').style.display = 'block';
+                    document.getElementById('show-detail-btn').innerHTML = 'Cerrar';
+                }
 
+            })
             $('#note-modal').on('show.bs.modal', function (event) {
                 let modal = $(this);
                 let button = $(event.relatedTarget);

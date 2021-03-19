@@ -44,18 +44,10 @@ class Helper
 
         return $image;
     }
-    public static function saveIcon($file, $path, $filename, $width = 36, $height = 36, $option = 'resize')
+    public static function saveIcon($file, $path, $filename)
     {
-        $image = Image::make($file)->widen($width);
+        $image = Image::make($file);
 
-        switch ($option) {
-            default:
-                $image->resize($width, $height, function ($constraint) use ($height, $width) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-                break;
-        }
         Storage::disk(getDisk())->put($path . $filename, (string) $image->encode());
 
         return $image;
