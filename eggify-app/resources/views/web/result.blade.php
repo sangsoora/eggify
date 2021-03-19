@@ -1,6 +1,7 @@
 @extends('web.layout.master')
 
 @section('content')
+    @include('web.layout.sidebar')
     <header class="header-small mobile">
         <div class="d-flex position-relative mb-2">
             <a class="link-icon" href="{{ route('web.search.provider') }}"><i class="la la-arrow-left mr-2"></i></a>
@@ -20,7 +21,7 @@
           <a href="https://community.eggify.net/" class="mr-5">Comunidad</a>
         </div>
         @if (!(auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser()))
-            <div id="header-links" class="p-2 align-self-center"><a href="javascript:void(0)" onclick="sidepopuplogin.open()">Acceder</a><span class="mx-1">/
+            <div id="header-links" class="p-2 align-self-center"><a href="javascript:void(0)" onclick="sidepopuplogin.open()">Acceder</a><span class="mx-1">/</span><a href="javascript:void(0)" onclick="sidepopuplogin.open()">Regístrate</a></div>
         @endif
         <button class="btn btn-nav" type="button" onclick="sidenav.open()"><i class="far fa-user"></i></button>
     </header>

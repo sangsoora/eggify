@@ -48,8 +48,7 @@
   </div>
   <div class="footer-columns">
     <h5>Síguenos en</h5>
-    <p><a href="">Instagram</a></p>
-    <p><a href="">Facebook</a></p>
-    <p><a href="">YouTube</a></p>
+    <p><a href="https://www.instagram.com/eggi.fy/?hl=en">Instagram</a></p>
+    <p><a href="https://www.linkedin.com/company/eggify/">LinkedIn</a></p>
   </div>
 </footer>
