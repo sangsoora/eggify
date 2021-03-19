@@ -25,7 +25,7 @@
     <main class="main-desktop">
         <div class="d-flex provider-header-desktop">
             <div class="mr-3 profile-img">
-                <img src="{{ $user->provider->provider_company != null ? $user->provider->provider_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}" alt="{{ $user->provider->name }}">
+                <img src="{{ $user->provider->provider_company != null ? $user->provider->provider_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}" alt="{{ $user->provider->provider_company != null ? $user->provider->provider_company->name : '' }}">
             </div>
             <div class="align-self-center">
                 <h5 class="m-0">{{ $user->provider->name }}</h5>

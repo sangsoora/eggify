@@ -32,15 +32,17 @@
                 <span class="like"><i class="la la-heart"></i></span>--}}
                 <div class="carousel slide" data-ride="carousel" data-interval="false" data-pause="false" data-keyboard="false">
                     <div class="carousel-inner">
-                        <div class="carousel-item active"><img class="w-100 d-block" src="/assets/img/chears.jpg" alt="Slide Image"></div>
-                        <div class="carousel-item"><img class="w-100 d-block" src="/assets/img/slider-comunity.png" alt="Slide Image"></div>
-                        <div class="carousel-item"><img class="w-100 d-block" src="/assets/img/slider-providers.png" alt="Slide Image"></div>
+                        <div class="carousel-item active">
+                            <img class="w-100 d-block" src="{{ $provider->provider_company != null ? $provider->provider_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}" alt="{{ $provider->provider_company != null ? $provider->provider_company->name : '' }}">
+                        </div>
+                        {{--<div class="carousel-item"><img class="w-100 d-block" src="/assets/img/slider-comunity.png" alt="Slide Image"></div>
+                        <div class="carousel-item"><img class="w-100 d-block" src="/assets/img/slider-providers.png" alt="Slide Image"></div>--}}
                     </div>
                     <div><a class="carousel-control-prev" href="#" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#" role="button" data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
                     <ol class="carousel-indicators">
                         <li data-target="#" data-slide-to="0" class="active"></li>
-                        <li data-target="#" data-slide-to="1"></li>
-                        <li data-target="#" data-slide-to="2"></li>
+                        {{--<li data-target="#" data-slide-to="1"></li>
+                        <li data-target="#" data-slide-to="2"></li>--}}
                     </ol>
                 </div>
                 <div class="card-body mobile">
@@ -400,7 +402,9 @@
                     @foreach($ratingsProvider as $i => $el)
                         <div class="opinion">
                             <div class="row mb-2">
-                                <div class="col-3"><img class="rounded-circle" src="{{ $el->rating->user->operator->operator_company != null ? $el->rating->user->operator->operator_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}"></div>
+                                <div class="col-3">
+                                    <img class="rounded-circle" src="{{ $el->rating->user->operator->operator_company != null ? $el->rating->user->operator->operator_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}" alt="{{ $el->rating->user->operator->operator_company != null ? $el->rating->user->operator->operator_company->name : '' }}">
+                                </div>
                                 <div class="col-6 text">
                                     <span class="d-block title">{{ $el->rating->user->name }}</span>
                                     <span class="d-block">{{ $el->rating->user->operator->operator_position->name }}</span>

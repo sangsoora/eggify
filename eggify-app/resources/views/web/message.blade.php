@@ -17,7 +17,15 @@
             <div class="row mt-3">
                 <div class="col-12">
                     <div class="row mb-2 opinion pb-3">
-                        <div class="col-3"><img class="rounded-circle" src="/assets/img/user.png"></div>
+                        <div class="col-3">
+                            @if ($message->user_from->isOperator())
+                                <img class="rounded-circle" src="{{ $message->user_from->operator != null && $message->user_from->operator->operator_company != null ? $message->user_from->operator->operator_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}"
+                                     alt="{{ $message->user_from->operator->operator_company != null ? $message->user_from->operator->operator_company->name : '' }}">
+                            @else
+                                <img class="rounded-circle" src="{{ $message->user_from->provider != null && $message->user_from->provider->provider_company != null ? $message->user_from->provider->provider_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}"
+                                     alt="{{ $message->user_from->provider->provider_company->operator_company != null ? $message->user_from->provider->provider_company->name : '' }}">
+                            @endif
+                        </div>
                         <div class="col-9 text">
                             <span class="d-block title">{{ $message->user_from->name }}</span>
                             @if ($message->user_from->isOperator())
