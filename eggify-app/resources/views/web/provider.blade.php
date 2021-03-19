@@ -176,11 +176,11 @@
                 <div class="col-12 provider-infos-desktop">
                     <div class="provider-infos">
                         <h5 class="title-action mb-3">¿Quiénes sois?</h5>
-                        <p>Somos un equipo de 25 personas apasionadas por los destilados. Nuestra empresa se llama Espirituosos S.A. y todos los productos son hechos a mano.</p>
+                        <p>{{ $provider->about }}</p>
                     </div>
                     <div class="provider-infos">
                         <h5 class="title-action mb-3">Municipio donde estáis ubicados</h5>
-                        <p>Municipio</p>
+                        <p>{{ $provider->municipality }}</p>
                     </div>
                     <div class="provider-infos">
                         <h5 class="title-action mb-3">¿A qué os dedicáis?</h5>
@@ -188,15 +188,15 @@
                     </div>
                     <div class="provider-infos">
                         <h5 class="title-action mb-3">Localizaciones donde operáis</h5>
-                        <p>Locaciones</p>
+                        <p>{{ $provider->location }}</p>
                     </div>
                     <div class="provider-infos">
                         <h5 class="title-action mb-3">¿Cuál es vuestra propuesta de valor (USP)?</h5>
-                        <p>Todos nuestros destilados son artesanale, seleccionamos solo la major materia prima para dar la mejor calidad del producto final. Vendemos solo a los clientes más premium que quieren excelencia en sus cóckteles.</p>
+                        <p>{{ $provider->usp }}</p>
                     </div>
                     <div class="provider-infos">
                         <h5 class="title-action mb-3">¿Cuándo empezasteis en el mercado?</h5>
-                        <p>Entra la fecha de apertura del negocio</p>
+                        <p>{{ date('d/m/Y', strtotime($provider->starting))  }}</p>
                     </div>
                 </div>
             </div>

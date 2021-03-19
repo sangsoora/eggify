@@ -55,10 +55,36 @@
         </section>
         <hr>
         <section class="container pt-0">
-            <div class="row">
+            <div class="row mb-4">
                 <div class="col-12">
-                    <h5 class="title-action">Descripción de tu empresa</h5>
+                    <h5 class="title-action">¿Quiénes sois?</h5>
+                    <textarea class="form-control" rows="5" name="about">{{ $user->provider->about }}</textarea>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h5 class="title-action">¿A qué os dedicáis?</h5>
                     <textarea class="form-control" rows="5" name="description">{{ $user->provider->description }}</textarea>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h5 class="title-action">¿Cuál es vuestra propuesta de valor (USP)?</h5>
+                    <textarea class="form-control" rows="5" name="usp">{{ $user->provider->usp }}</textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <h5 class="title-action desktop-title">Municipio donde estáis ubicados</h5>
+                    <input class="form-control with-border mb-4" type="text" name="municipality" value="{{ $user->provider->municipality }}">
+                </div>
+                <div class="col-12 col-md-4">
+                    <h5 class="title-action desktop-title">Localizaciones donde operáis</h5>
+                    <input class="form-control with-border mb-4" type="text" name="location" value="{{ $user->provider->location }}">
+                </div>
+                <div class="col-12 col-md-4">
+                    <h5 class="title-action desktop-title">¿Cuándo empezasteis en el mercado?</h5>
+                    <input class="form-control with-border mb-4" type="date" name="starting" value="{{ $user->provider->starting }}">
                 </div>
             </div>
         </section>

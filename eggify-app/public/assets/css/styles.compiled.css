@@ -1000,6 +1000,10 @@ main, .sidenav, .side {
   display: none !important;
 }
 
+.form-control.with-border {
+  border: 1px solid #4A4A4A !important;;
+}
+
 @media screen and (max-height: 450px) {
   .sidenav, .sidepopup {
     padding-top: 15px;
@@ -1201,6 +1205,9 @@ main, .sidenav, .side {
     height: 240px;
     border-radius: 50%;
     margin-bottom: 2rem;
+  }
+  .desktop-title {
+    height: 60px;
   }
 }
 
