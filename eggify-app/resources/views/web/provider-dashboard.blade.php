@@ -8,7 +8,7 @@
             <div class="p-2">
                 <button class="btn btn-nav" type="button" onclick="sidenav.open()"><i class="la la-navicon"></i></button>
             </div>
-            <a class="m-auto" href="{{ route('web.index') }}"><img class="p-0" src="/assets/img/logo-color.png"></a>
+            <a class="m-auto" href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}"><img class="p-0" src="/assets/img/logo-color.png"></a>
         </div>
         <div class="d-flex header-content">
             <div class="mr-3 profile-img">

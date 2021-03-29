@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ProviderSubcategory;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class SubcategoryController extends Controller
@@ -18,8 +19,9 @@ class SubcategoryController extends Controller
 
     public function index()
     {
-        if (!(auth()->check() && User::findOrFail(auth()->user()->id)->isAdmin())) {
-            return abort(401);
+        if (!auth()->check() || (auth()->check() && !User::findOrFail(auth()->user()->id)->isAdmin())) {
+            Auth::logout();
+            return redirect('/admin/login');
         }
 
         return view('admin.pages.subcategory.index');

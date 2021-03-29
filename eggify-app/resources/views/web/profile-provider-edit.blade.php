@@ -4,7 +4,7 @@
     @include('web.layout.sidebar')
     <header class="header-oval mobile">
         <div class="bg-custom-oval"></div>
-        <div class="d-flex header-content position-relative mb-2"><a class="link-icon" href="{{ route('web.index') }}"><i class="la la-arrow-left"></i></a>
+        <div class="d-flex header-content position-relative mb-2"><a class="link-icon" href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}"><i class="la la-arrow-left"></i></a>
             <div class="m-auto text-center profile-img"><img src="{{ $user->provider->provider_company != null ? $user->provider->provider_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}" alt="{{ $user->provider->name }}">
                 <p class="m-0 mt-1">{{ $user->provider->name }}</p>
             </div>
@@ -41,7 +41,7 @@
                     <div class="form-group input-text-icon"><input class="form-control" type="password" placeholder="******" name="password" value=""><i class="la la-eye"></i></div>
                     <div class="form-group input-text-icon"><input class="form-control" type="email" placeholder="Email" required="" name="email" value="{{ $user->email }}"><i class="la la-envelope"></i></div>
                     <div class="form-group input-text-icon"><input class="form-control" type="tel" placeholder="Teléfono" required="" name="phone" value="{{ $user->provider->phone }}"><i class="la la-phone"></i></div>
-                    <div class="form-group input-text-icon"><input class="form-control" type="text" placeholder="Ubicación" name="address" required="" value="{{ $user->provider->address }}"><i class="la la-map-marker"></i></div>
+                    <div class="form-group input-text-icon"><input class="form-control" type="text" placeholder="Ubicación" id="address" name="address" required="" value="{{ $user->provider->address }}"><i class="la la-map-marker"></i></div>
                     <div class="form-group">
                         <h6 class="mb-1">¿Qué productos o servicios ofrecen?</h6>
                         <div class="provider-category">
@@ -125,7 +125,14 @@
 @endsection
 
 @push('custom-scripts')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&libraries=places&language={{ app()->getLocale() }}">
+    </script>
+
     <script type="text/javascript">
+
+        const input = document.getElementById("address");
+        const autocomplete = new google.maps.places.Autocomplete(input);
 
         $('.provider-category button').on('click', function () {
             let $that = $(this);

@@ -36,7 +36,7 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 {!! Form::label('password', trans('admin.page.provider.table.password')) !!}
-                                {!! Form::input('password', 'password', old('password'), ['id' => 'password', 'class' => 'form-control', 'placeholder' => trans('admin.page.users-admin.table.password'), 'required']) !!}
+                                {!! Form::input('password', 'password', old('password'), ['id' => 'password', 'class' => 'form-control', 'placeholder' => trans('admin.page.users-admin.table.password')]) !!}
                             </div>
                         </div><!-- Col -->
                     </div><!-- Row -->
@@ -57,6 +57,37 @@
                             <div class="form-group">
                                 {!! Form::label('provider_subcategory_id', trans('admin.page.provider.table.provider_subcategory')) !!}
                                 {!! Form::select('provider_subcategory_id', $providersubcategory->pluck('name', 'id'), $provider->provider_subcategory_id, ['class' => 'form-control', 'id' => 'provider_subcategory_id']) !!}
+                            </div>
+                        </div><!-- Col -->
+                    </div><!-- Row -->
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {!! Form::label('about', trans('admin.page.provider.table.about')) !!}
+                                {!! Form::textarea('about', $provider->about, ['class' => 'form-control', '', 'id'=> 'about', 'size' => '5x5']) !!}
+                            </div>
+                        </div><!-- Col -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {!! Form::label('description', trans('admin.page.provider.table.description')) !!}
+                                {!! Form::textarea('description', $provider->description, ['class' => 'form-control', '', 'id'=> 'description', 'size' => '5x5']) !!}
+                            </div>
+                        </div><!-- Col -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {!! Form::label('usp', trans('admin.page.provider.table.usp')) !!}
+                                {!! Form::textarea('usp', $provider->usp, ['class' => 'form-control', '', 'id'=> 'usp', 'size' => '5x5']) !!}
+                            </div>
+                        </div><!-- Col -->
+                    </div><!-- Row -->
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-check form-check-flat form-check-primary">
+                                <label class="form-check-label">
+                                    {!! Form::checkbox('visible', 1, $provider->visible, ['id' => 'visible', 'class' => 'form-check-input']) !!}
+                                    @lang('admin.page.provider.table.visible_check')
+                                    <i class="input-frame"></i>
+                                </label>
                             </div>
                         </div><!-- Col -->
                     </div><!-- Row -->

@@ -30,9 +30,11 @@
                             <thead>
                             <tr>
                                 <th>@lang('admin.page.producer.table.name')</th>
-                                <th>@lang('admin.page.producer.table.services')</th>
+                                <th>@lang('admin.page.provider.table.category')</th>
+                                <th>@lang('admin.page.provider.table.subcategory')</th>
                                 <th>@lang('admin.page.producer.table.orders')</th>
                                 <th>@lang('admin.page.producer.table.plan')</th>
+                                <th>@lang('admin.page.provider.table.visible')</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -66,9 +68,11 @@
                 },
                 columns: [
                     {data: 'name'},
-                    {data: 'services'},
+                    {data: 'category'},
+                    {data: 'subcategory'},
                     {data: 'orders'},
                     {data: 'plan'},
+                    {data: 'visible'},
                     {data: 'action', orderable: false, searchable: false}
                 ],
                 initComplete: function(settings, json) {

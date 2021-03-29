@@ -108,7 +108,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <p>“Usando Googlity hemos logrado capturar muchos más clientes!”</p>
+                                <p>“Usando Eggify hemos logrado capturar muchos más clientes!”</p>
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <p>“Usando Googlity hemos logrado capturar muchos más clientes!”</p>
+                                <p>“Usando Eggify hemos logrado capturar muchos más clientes!”</p>
                             </div>
                         </div>
                     </div>

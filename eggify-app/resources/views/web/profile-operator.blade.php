@@ -5,7 +5,7 @@
     <header class="header-oval mobile">
         <div class="bg-custom-oval"></div>
         <div class="header-sup">
-            <div class="p-2"><button class="btn btn-nav" type="button" onclick="sidenav.open()"><i class="la la-navicon"></i></button></div><a class="m-auto" href="{{ route('web.index') }}"><img class="p-0" src="/assets/img/logo-color.png"></a>
+            <div class="p-2"><button class="btn btn-nav" type="button" onclick="sidenav.open()"><i class="la la-navicon"></i></button></div><a class="m-auto" href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}"><img class="p-0" src="/assets/img/logo-color.png"></a>
         </div>
         <div class="d-flex header-content profile-img-small position-relative mb-2">
             <div class="m-auto text-center profile-img">

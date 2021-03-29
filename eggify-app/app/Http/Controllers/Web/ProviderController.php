@@ -26,6 +26,10 @@ class ProviderController extends Controller
 
         $provider = Provider::findOrFail($id);
 
+        if (!$provider->visible) {
+            return redirect()->route('web.index');
+        }
+
         $note = null;
         if (auth()->check()) {
             $note = Note::where('user_from_id', auth()->user()->id)->where('user_to_id', $provider->user->id)->get();
@@ -154,6 +158,10 @@ class ProviderController extends Controller
 
             $arrCompany['logo'] = $filename;
         }
+
+        $request->merge([
+            'visible' => 0
+        ]);
 
         $user->provider->update($request->all());
 

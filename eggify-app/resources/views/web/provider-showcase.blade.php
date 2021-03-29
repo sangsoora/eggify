@@ -4,8 +4,8 @@
     @include('web.layout.sidebar')
     <header class="header-small mobile">
         <div class="d-flex position-relative mb-2">
-            <a class="link-icon" href="{{ route('web.index') }}"><i class="la la-arrow-left mr-2"></i></a>
-            <a class="m-auto" href="{{ route('web.index') }}"><img src="/assets/img/logo-color.png"></a>
+            <a class="link-icon" href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}"><i class="la la-arrow-left mr-2"></i></a>
+            <a class="m-auto" href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}"><img src="/assets/img/logo-color.png"></a>
         </div>
     </header>
     <header class="d-flex header-opacity justify-content-between" id="header-desktop">

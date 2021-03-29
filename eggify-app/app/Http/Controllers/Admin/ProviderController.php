@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Helpers\Helper;
 use App\Models\Provider;
 use App\Models\ProviderCategory;
+use App\Models\ProviderCompany;
 use App\Models\ProviderSubcategory;
 use App\Models\ProviderType;
 use App\Models\Role;
@@ -12,6 +13,7 @@ use App\Models\UserType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class ProviderController extends Controller
@@ -23,8 +25,9 @@ class ProviderController extends Controller
 
     public function index()
     {
-        if (!(auth()->check() && User::findOrFail(auth()->user()->id)->isAdmin())) {
-            return abort(401);
+        if (!auth()->check() || (auth()->check() && !User::findOrFail(auth()->user()->id)->isAdmin())) {
+            Auth::logout();
+            return redirect('/admin/login');
         }
 
         return view('admin.pages.provider.index');
@@ -36,14 +39,21 @@ class ProviderController extends Controller
 
         return $datatables->of($query)
             ->addColumn('action', 'admin.pages.provider.partials.actions')
-            ->editColumn('services', function ($q) {
-                return sprintf('%s / %s', $q->provider_category->name, $q->provider_subcategory->name);
+            ->editColumn('category', function ($q) {
+                return $q->provider_category != null ? $q->provider_category->name : '';
+            })
+            ->editColumn('subcategory', function ($q) {
+                return $q->provider_subcategory != null ? $q->provider_subcategory->name : '';
             })
             ->editColumn('orders', function ($q) {
                 return count($q->user->budget_received->all());
             })
             ->editColumn('plan', function ($q) {
                 return $q->provider_plan->name;
+            })
+            ->editColumn('visible', function ($q) {
+                $html = $q->visible ? '<button type="button" class="btn btn-success btn-icon" data-toggle="tooltip" data-placement="top" title="Validado!"><i data-feather="eye"></i></button>' : '<button type="button" class="btn btn-danger btn-icon" data-toggle="tooltip" data-placement="top" title="Pendiente de valicación!"><i data-feather="eye-off"></i></button>';
+                return $html;
             })
             ->rawColumns([0])
             ->make(true);
@@ -99,6 +109,18 @@ class ProviderController extends Controller
             $request->merge([
                 'password' => bcrypt($request->password)
             ]);
+        } else {
+            $request->merge([
+                'password' => $user->password
+            ]);
+        }
+
+        if (isset($request->visible)) {
+            if ($request->visible == 'on') {
+                $request->merge(['visible' => 1]);
+            }
+        } else {
+            $request->merge(['visible' => 0]);
         }
 
         $user->update($request->all());
@@ -113,6 +135,11 @@ class ProviderController extends Controller
         $user = User::findOrFail($provider->user->id);
 
         try {
+            if ($provider->provider_company != null) {
+                $providerCompany = ProviderCompany::findOrFail($provider->provider_company->id);
+                $providerCompany->delete();
+            }
+
             $provider->delete();
             $user->delete();
         } catch (\Illuminate\Database\QueryException $e) {

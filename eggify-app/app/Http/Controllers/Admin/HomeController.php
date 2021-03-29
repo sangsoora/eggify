@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Budget;
 use App\Models\Operator;
 use App\Models\Provider;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -26,6 +28,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (!auth()->check() || (auth()->check() && !User::findOrFail(auth()->user()->id)->isAdmin())) {
+            Auth::logout();
+            return redirect('/admin/login');
+        }
+
         $operators_count = Operator::all()->count();
         $providers_count = Provider::distributor()->get()->count();
         $producers_count = Provider::producer()->get()->count();

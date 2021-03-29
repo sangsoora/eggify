@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Http\Helpers\Helper;
+use App\Http\Traits\Geo;
 use App\Models\Budget;
 use App\Models\BudgetMessage;
 use App\Models\BudgetStatus;
@@ -53,6 +54,24 @@ class UserController extends Controller
             ));
         }
 
+        $addressData = Helper::getAddressData($request->address);
+
+        if (!isset($addressData->postal_code) || !isset($addressData->city) || !isset($addressData->state) || !isset($addressData->country)) {
+            return response()->json(array(
+                'status' => 500,
+                'message' => 'La dirección no es correcta'
+            ));
+        }
+
+        $address_id = Geo::postal_code($addressData);
+
+        if ($address_id == null) {
+            return response()->json(array(
+                'status' => 500,
+                'message' => 'La dirección no es correcta'
+            ));
+        }
+
         // Login
         $credentials = $request->only('email', 'password');
 
@@ -68,9 +87,22 @@ class UserController extends Controller
         $request->merge([
             'user_id' => $user->id,
             'policy_consent' => $request->policy_consent != null && $request->policy_consent == 'on' ? 1 : 0,
+            'postal_code_id' => $address_id['postal_code_id']
         ]);
 
         $operator = Operator::create($request->all());
+
+        // Company
+        $arrCompany = [
+            'name' => '',
+            'web' => '',
+            'years' => 1,
+            'linkedin' => $request->linkedin,
+            'operator_id' => $operator->id,
+            'operator_company_employees_id' => 1,
+        ];
+
+        $operatorCompany = OperatorCompany::create($arrCompany);
 
         // Login
         Auth::attempt($credentials);
@@ -101,6 +133,24 @@ class UserController extends Controller
             ));
         }
 
+        $addressData = Helper::getAddressData($request->address);
+
+        if (!isset($addressData->postal_code) || !isset($addressData->city) || !isset($addressData->state) || !isset($addressData->country)) {
+            return response()->json(array(
+                'status' => 500,
+                'message' => 'La dirección no es correcta'
+            ));
+        }
+
+        $address_id = Geo::postal_code($addressData);
+
+        if ($address_id == null) {
+            return response()->json(array(
+                'status' => 500,
+                'message' => 'La dirección no es correcta'
+            ));
+        }
+
         // Login
         $credentials = $request->only('email', 'password');
 
@@ -117,10 +167,22 @@ class UserController extends Controller
             'user_id' => $user->id,
             'policy_consent' => $request->policy_consent != null && $request->policy_consent == 'on' ? 1 : 0,
             'provider_plan_id' => 1,
-            'postal_code_id' => 1
+            'postal_code_id' => $address_id['postal_code_id']
         ]);
 
         $provider = Provider::create($request->all());
+
+        // Company
+        $arrCompany = [
+            'name' => '',
+            'web' => '',
+            'years' => 1,
+            'linkedin' => $request->linkedin,
+            'provider_id' => $provider->id,
+            'provider_company_employees_id' => 1,
+        ];
+
+        $providerCompany = ProviderCompany::create($arrCompany);
 
         // Login
         Auth::attempt($credentials);
@@ -217,6 +279,29 @@ class UserController extends Controller
         }
 
         $user = User::findOrFail(auth()->user()->id);
+
+        // Address
+        $addressData = Helper::getAddressData($request->address);
+
+        if (!isset($addressData->postal_code) || !isset($addressData->city) || !isset($addressData->state) || !isset($addressData->country)) {
+            return response()->json(array(
+                'status' => 500,
+                'message' => 'La dirección no es correcta'
+            ));
+        }
+
+        $address_id = Geo::postal_code($addressData);
+
+        if ($address_id == null) {
+            return response()->json(array(
+                'status' => 500,
+                'message' => 'La dirección no es correcta'
+            ));
+        }
+
+        $request->merge([
+            'postal_code_id' => $address_id['postal_code_id']
+        ]);
 
         if ($user->isOperator()) {
 

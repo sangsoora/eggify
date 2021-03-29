@@ -100,7 +100,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <p>Usando Googlity he logrado optimizar mi tiempo como nunca antes!</p>
+                                <p>Usando Eggify he logrado optimizar mi tiempo como nunca antes!</p>
                             </div>
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <p>Usando Googlity he logrado optimizar mi tiempo como nunca antes!</p>
+                                <p>Usando Eggify he logrado optimizar mi tiempo como nunca antes!</p>
                             </div>
                         </div>
                     </div>

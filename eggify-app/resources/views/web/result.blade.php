@@ -6,20 +6,20 @@
     <header class="header-small mobile">
         <div class="d-flex position-relative mb-2">
             <a class="link-icon" href="{{ route('web.search.provider') }}"><i class="la la-arrow-left mr-2"></i></a>
-            <a class="m-auto" href="{{ route('web.index') }}"><img src="/assets/img/logo-color.png"></a>
+            <a class="m-auto" href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}"><img src="/assets/img/logo-color.png"></a>
         </div>
     </header>
-     <header class="d-flex header-opacity justify-content-between" id="header-desktop">
+    <header class="d-flex header-opacity justify-content-between" id="header-desktop">
         <div class="p-2">
             <button class="btn mr-auto p-0" type="button"><a href="/"><img src="/assets/img/logo-color.png"></a></button>
         </div>
         <div class="p-2 align-self-center nav-menu-desktop">
-          <a href="{{ route('web.about') }}" class="mr-5">Sobre nosotros</a>
-          <a href="{{ route('web.search.provider') }}" class="mr-5">Proveedores</a>
-          @if (auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser())
-              <a href="{{ route('web.inbox') }}" class="mr-5">Inbox</a>
-          @endif
-          <a href="https://community.eggify.net/" class="mr-5">Comunidad</a>
+            <a href="{{ route('web.about') }}" class="mr-5">Sobre nosotros</a>
+            <a href="{{ route('web.search.provider') }}" class="mr-5">Proveedores</a>
+            @if (auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser())
+                <a href="{{ route('web.inbox') }}" class="mr-5">Inbox</a>
+            @endif
+            <a href="https://community.eggify.net/" class="mr-5">Comunidad</a>
         </div>
         @if (!(auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser()))
             <div id="header-links" class="p-2 align-self-center"><a href="javascript:void(0)" onclick="sidepopuplogin.open()">Acceder</a><span class="mx-1">/</span><a href="javascript:void(0)" onclick="sidepopuplogin.open()">Regístrate</a></div>
@@ -158,18 +158,20 @@
                 </div>
             </div>
         </section>
-        <section class="container">
-            <div class="row">
-                <div class="col">
-                    <h5 class="title-action mb-3">Provincias cercanas</h5>
-                    <ul class="list-unstyled list-custom">
-                        @foreach($states as $i => $el)
-                            <li class="d-flex" style="cursor: pointer" onclick="window.location.href='{{ route('web.result', [ 'category' => $category_selected != null ? $category_selected->id : 0, 'city' => $el->id ]) }}'"><span class="mr-auto">{{ $el->name }}</span><span>{{ $el->city->first()->postal_code->first()->provider->count() }}</span></li>
-                        @endforeach
-                    </ul>
+        @if($cities->count() > 0)
+            <section class="container">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="title-action mb-3">Ciudades cercanas</h5>
+                        <ul class="list-unstyled list-custom">
+                            @foreach($cities->random($cities->count() >= 5 ? 5 : $cities->count()) as $i => $el)
+                                <li class="d-flex" style="cursor: pointer" onclick="window.location.href='{{ route('web.result', [ 'category' => $category_selected != null ? $category_selected->id : 0, 'city' => $el->id ]) }}'"><span class="mr-auto">{{ $el->name }}</span><span>{{ $el->postal_code->first()->provider->count() }}</span></li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endif
         <section id="go-top" class="container">
             <div class="row">
                 <div class="col text-center">

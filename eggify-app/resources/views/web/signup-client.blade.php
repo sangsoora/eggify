@@ -4,7 +4,7 @@
     @include('web.layout.sidebar')
     <header class="header-oval mobile">
         <div class="bg-custom-oval"></div>
-        <div class="d-flex header-content position-relative mb-2"><a class="link-icon" href="{{ route('web.index') }}"><i class="la la-arrow-left"></i></a><a class="m-auto" href="{{ route('web.index') }}"><img src="/assets/img/logo-splash.png"></a><a class="link-icon link-icon-right" href="{{ route('web.index') }}"><i class="la la-close"></i></a></div>
+        <div class="d-flex header-content position-relative mb-2"><a class="link-icon" href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}"><i class="la la-arrow-left"></i></a><a class="m-auto" href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}"><img src="/assets/img/logo-splash.png"></a><a class="link-icon link-icon-right" href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}"><i class="la la-close"></i></a></div>
     </header>
     <header class="d-flex header-opacity justify-content-between" id="header-desktop">
         <div class="p-2">
@@ -44,10 +44,6 @@
                     <div class="form-group input-text-icon">
                         <input class="form-control" type="tel" placeholder="Teléfono" required="" name="phone"><i class="la la-phone"></i>
                     </div>
-                    <div class="form-group input-text-icon">
-                        {!! Form::select('operator_position_id', $positions->pluck('name', 'id'), old('operator_position_id'), ['class' => 'form-control', 'id' => 'operator_position_id', 'required']) !!}
-                        <i class="la la-briefcase"></i>
-                    </div>
                     <div class="form-group">
                         <h6 class="mb-1">Trabajas en un:</h6>
                         <div class="job-category">
@@ -66,7 +62,10 @@
                         </div>
                     </div>
                     <div class="form-group input-text-icon">
-                        <input class="form-control" type="text" placeholder="Ubicación" name="address" required=""><i class="la la-map-marker"></i>
+                        <input class="form-control" type="text" placeholder="Ubicación" id="address" name="address" required="" autocomplete="off"><i class="la la-map-marker"></i>
+                    </div>
+                    <div class="form-group input-text-icon">
+                        <input class="form-control" type="text" placeholder="LinkedIn" id="linkedin" name="linkedin" required=""><i class="la la-map-briefcase"></i>
                     </div>
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" id="policy_consent" required="" name="policy_consent">
@@ -127,7 +126,14 @@
 @endsection
 
 @push('custom-scripts')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&libraries=places&language={{ app()->getLocale() }}">
+    </script>
+
     <script type="text/javascript">
+
+        const input = document.getElementById("address");
+        const autocomplete = new google.maps.places.Autocomplete(input);
 
         $('.job-category button').on('click', function () {
             let $that = $(this);

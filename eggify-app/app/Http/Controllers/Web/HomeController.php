@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function index(Request $request) {
         $bodyClass = '';
 
-        $providers = Provider::inRandomOrder()->limit(6)->get();
+        $providers = Provider::visible()->inRandomOrder()->limit(6)->get();
         $categories = ProviderCategory::all();
         $categories_featured = ProviderCategory::inRandomOrder()->limit(6)->get();
 

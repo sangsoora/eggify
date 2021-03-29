@@ -19,11 +19,15 @@ class ResultController extends Controller
     {
         $bodyClass = 'page-sub';
 
-        $cities = City::all();
+        $cities = City::whereHas('postal_code', function ($query) {
+            $query->whereHas('provider', function ($query) {
+                $query->visible();
+            });
+        })->get();
         $states = State::all();
         $city_selected = null;
         $categories = ProviderCategory::all();
-        $providers = Provider::with('provider_category', 'postal_code');
+        $providers = Provider::with('provider_category', 'postal_code')->visible();
         $ratings_criteria = RatingCriteria::all();
 
         $category_selected = null;
@@ -32,7 +36,7 @@ class ResultController extends Controller
             $providers = $providers->where('provider_category_id', $category);
         }
 
-        $city = null;
+        $city_selected = null;
         if ($city) {
             $city_selected = City::where('id', $city)->firstOrFail();
             $providers = $providers->whereHas('postal_code', function ($query) use ($city) {
@@ -54,7 +58,11 @@ class ResultController extends Controller
     {
         $bodyClass = 'page-sub';
 
-        $cities = City::all();
+        $cities = City::whereHas('postal_code', function ($query) {
+            $query->whereHas('provider', function ($query) {
+                $query->visible();
+            });
+        })->get();
         $city_selected = null;
         $category_selected = null;
         $states = State::all();
@@ -81,7 +89,7 @@ class ResultController extends Controller
 
         }
 
-        $providers = $providers->get();
+        $providers = $providers->visible()->get();
 
         return view('web.result', compact('bodyClass', 'cities', 'states', 'city_selected', 'categories', 'category_selected', 'providers', 'ratings_criteria'));
     }

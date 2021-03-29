@@ -33,7 +33,7 @@
                     <div class="form-group input-text-icon"><input class="form-control" type="password" placeholder="******" name="password" value=""><i class="la la-eye"></i></div>
                     <div class="form-group input-text-icon"><input class="form-control" type="email" placeholder="Email" required="" name="email" value="{{ $user->email }}"><i class="la la-envelope"></i></div>
                     <div class="form-group input-text-icon"><input class="form-control" type="tel" placeholder="Teléfono" required="" name="phone" value="{{ $user->operator->phone }}"><i class="la la-phone"></i></div>
-                    <div class="form-group input-text-icon"><input class="form-control" type="text" placeholder="Ubicación" name="address" required="" value="{{ $user->operator->address }}"><i class="la la-map-marker"></i></div>
+                    <div class="form-group input-text-icon"><input class="form-control" type="text" placeholder="Ubicación" id="address" name="address" required="" value="{{ $user->operator->address }}"><i class="la la-map-marker"></i></div>
                     <div class="form-group mt-5">
                         <h6 class="mb-1">Trabajas en:</h6>
                         <div class="form-group input-text-icon"><input class="form-control" type="text" placeholder="Nombre empresa" name="companyname" required="" value="{{ $user->operator->operator_company != null ? $user->operator->operator_company->name : '' }}"><i class="la la-map-briefcase"></i></div>
@@ -113,7 +113,14 @@
 @endsection
 
 @push('custom-scripts')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&libraries=places&language={{ app()->getLocale() }}">
+    </script>
+
     <script type="text/javascript">
+
+        const input = document.getElementById("address");
+        const autocomplete = new google.maps.places.Autocomplete(input);
 
         $('#company-employees button').on('click', function () {
             let $that = $(this);

@@ -20,6 +20,7 @@ class CreateProvidersTable extends Migration
             $table->string('address');
             $table->text('description')->nullable();
             $table->boolean('policy_consent')->default(0);
+            $table->boolean('visible')->default(0);
             $table->foreignId('user_id')->nullable()->constrained('users');
             $table->foreignId('provider_type_id')->nullable()->constrained('providers_type');
             $table->foreignId('provider_category_id')->nullable()->constrained('providers_category');

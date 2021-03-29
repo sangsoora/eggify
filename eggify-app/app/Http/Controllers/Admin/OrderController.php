@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ProviderCategory;
 use App\Models\ProviderSubcategory;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class OrderController extends Controller
@@ -22,8 +23,9 @@ class OrderController extends Controller
 
     public function index()
     {
-        if (!(auth()->check() && User::findOrFail(auth()->user()->id)->isAdmin())) {
-            return abort(401);
+        if (!auth()->check() || (auth()->check() && !User::findOrFail(auth()->user()->id)->isAdmin())) {
+            Auth::logout();
+            return redirect('/admin/login');
         }
 
         return view('admin.pages.order.index');

@@ -18,6 +18,7 @@ use App\Models\UserType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class OperatorController extends Controller
@@ -29,8 +30,9 @@ class OperatorController extends Controller
 
     public function index()
     {
-        if (!(auth()->check() && User::findOrFail(auth()->user()->id)->isAdmin())) {
-            return abort(401);
+        if (!auth()->check() || (auth()->check() && !User::findOrFail(auth()->user()->id)->isAdmin())) {
+            Auth::logout();
+            return redirect('/admin/login');
         }
 
         return view('admin.pages.operator.index');
@@ -133,6 +135,11 @@ class OperatorController extends Controller
         $user = User::findOrFail($operator->user->id);
 
         try {
+            if ($operator->operator_company != null) {
+                $operatorCompany = OperatorCompany::findOrFail($operator->operator_company->id);
+                $operatorCompany->delete();
+            }
+
             $operator->delete();
             $user->delete();
         } catch (\Illuminate\Database\QueryException $e) {

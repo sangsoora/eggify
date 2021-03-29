@@ -3,7 +3,7 @@
 @section('content')
     @include('web.layout.sidebar')
     <header class="header-small mobile">
-        <div class="d-flex position-relative"><a class="link-icon" href="{{ route('web.result', [ 'category' => $provider->provider_category->id, 'city' => $provider->postal_code->city->id ]) }}"><i class="la la-arrow-left mr-2"></i></a><a class="m-auto" href="{{ route('web.index') }}"><img src="/assets/img/logo-color.png"></a></div>
+        <div class="d-flex position-relative"><a class="link-icon" href="{{ route('web.result', [ 'category' => $provider->provider_category->id, 'city' => $provider->postal_code->city->id ]) }}"><i class="la la-arrow-left mr-2"></i></a><a class="m-auto" href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}"><img src="/assets/img/logo-color.png"></a></div>
         <div class="nav-anchor mt-3"><a class="active" href="#information">Información</a><a href="#photos">Fotos</a><a href="#opinions-rating">Opiniones</a><a href="#map">Mapa</a></div>
     </header>
     <header class="d-flex header-opacity justify-content-between" id="header-desktop">
@@ -11,12 +11,12 @@
             <button class="btn mr-auto p-0" type="button"><a href="/"><img src="/assets/img/logo-color.png"></a></button>
         </div>
         <div class="p-2 align-self-center nav-menu-desktop">
-          <a href="{{ route('web.about') }}" class="mr-5">Sobre nosotros</a>
-          <a href="{{ route('web.search.provider') }}" class="mr-5">Proveedores</a>
-          @if (auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser())
-              <a href="{{ route('web.inbox') }}" class="mr-5">Inbox</a>
-          @endif
-          <a href="https://community.eggify.net/" class="mr-5">Comunidad</a>
+            <a href="{{ route('web.about') }}" class="mr-5">Sobre nosotros</a>
+            <a href="{{ route('web.search.provider') }}" class="mr-5">Proveedores</a>
+            @if (auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser())
+                <a href="{{ route('web.inbox') }}" class="mr-5">Inbox</a>
+            @endif
+            <a href="https://community.eggify.net/" class="mr-5">Comunidad</a>
         </div>
         @if (!(auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser()))
             <div id="header-links" class="p-2 align-self-center"><a href="javascript:void(0)" onclick="sidepopuplogin.open()">Acceder</a><span class="mx-1">/</span><a href="javascript:void(0)" onclick="sidepopuplogin.open()">Regístrate</a></div>
@@ -95,81 +95,82 @@
                             </div>
                             <div class="d-flex justify-content-between">
                                 <button class="btn btn-secondary rounded-pill icon" style="width: 45%;" type="button" data-toggle="modal" data-target="#message-modal" data-userto="{{ $provider->user_id }}"><i class="la la-envelope mr-2"></i>Enviar mensaje</button>
-                        @else
-                            <div>
-                                <button class="btn btn-primary rounded-pill mb-4 w-100" type="button" data-toggle="modal" data-target="#register-modal-budget">Solicitar presupuesto</button>
+                                @else
+                                    <div>
+                                        <button class="btn btn-primary rounded-pill mb-4 w-100" type="button" data-toggle="modal" data-target="#register-modal-budget">Solicitar presupuesto</button>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <button class="btn btn-secondary rounded-pill icon" style="width: 45%;" type="button" data-toggle="modal" data-target="#register-modal-contact"><i class="la la-envelope mr-2"></i>Enviar mensaje</button>
+                                        @endif
+                                        <button class="btn btn-secondary rounded-pill icon" style="width: 45%;" type="button" data-toggle="modal" data-target="#register-modal-phone"><i class="la la-phone mr-2"></i>Ver teléfono</button>
+                                    </div>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <button class="btn btn-secondary rounded-pill icon" style="width: 45%;" type="button" data-toggle="modal" data-target="#register-modal-contact"><i class="la la-envelope mr-2"></i>Enviar mensaje</button>
-                        @endif
-                        <button class="btn btn-secondary rounded-pill icon" style="width: 45%;" type="button" data-toggle="modal" data-target="#register-modal-phone"><i class="la la-phone mr-2"></i>Ver teléfono</button>
-                      </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal fade" role="dialog" tabindex="-1" id="message-modal">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Enviar mensaje</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        </div>
-                        <div class="modal-body">
-                            {!! Form::textarea('message', '', ['class' => 'form-control', '', 'id'=> 'message', 'size' => '5x5']) !!}
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary rounded-pill w-100 m-auto" type="button" onclick="sendMessage(this)">@lang('global.general.send')</button>
+                <div class="modal fade" role="dialog" tabindex="-1" id="message-modal">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Enviar mensaje</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                {!! Form::textarea('message', '', ['class' => 'form-control', '', 'id'=> 'message', 'size' => '5x5']) !!}
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary rounded-pill w-100 m-auto" type="button" onclick="sendMessage(this)">@lang('global.general.send')</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal fade" role="dialog" tabindex="-1" id="register-modal-budget">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>No olvides que para poder solicitar un presupuesto y tener completo acceso a nuestra plataforma antes debes registrarte.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <a class="btn btn-primary rounded-pill w-100 m-auto" href="{{ route('web.signup-client') }}">Registrarme ahora</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" role="dialog" tabindex="-1" id="register-modal-contact">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>No olvides que para poder contactar con el proveedor y tener completo acceso a nuestra plataforma antes debes registrarte.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <a class="btn btn-primary rounded-pill w-100 m-auto" href="{{ route('web.signup-client') }}">Registrarme ahora</a>
+                <div class="modal fade" role="dialog" tabindex="-1" id="register-modal-budget">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>No olvides que para poder solicitar un presupuesto y tener completo acceso a nuestra plataforma antes debes registrarte.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a class="btn btn-primary rounded-pill w-100 m-auto" href="{{ route('web.signup-client') }}">Registrarme ahora</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal fade" role="dialog" tabindex="-1" id="register-modal-phone">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <div class="modal fade" role="dialog" tabindex="-1" id="register-modal-contact">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>No olvides que para poder contactar con el proveedor y tener completo acceso a nuestra plataforma antes debes registrarte.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a class="btn btn-primary rounded-pill w-100 m-auto" href="{{ route('web.signup-client') }}">Registrarme ahora</a>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <p>Actualiza a un plan PRO para poder ver el teléfono de contacto!</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary rounded-pill w-100 m-auto" type="button">Cambiar ahora</button>
+                    </div>
+                </div>
+                <div class="modal fade" role="dialog" tabindex="-1" id="register-modal-phone">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Actualiza a un plan PRO para poder ver el teléfono de contacto!</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary rounded-pill w-100 m-auto" type="button">Cambiar ahora</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="container">
+        <section id="details" class="container">
             <div class="row">
                 <div class="col-12 mobile">
                     <h5 class="title-action mb-3">¿Quiénes sois?</h5>
@@ -457,11 +458,14 @@
     <script type="text/javascript">
         $(document).ready(function () {
             document.getElementById('show-detail-btn').addEventListener('click', (e) => {
-              console.log('hola');
+                console.log('hola');
                 e.preventDefault();
                 if (document.getElementById('hidden-detail').style.display == 'block') {
                     document.getElementById('hidden-detail').style.display = 'none';
                     document.getElementById('show-detail-btn').innerHTML = 'Mostrar más detalles';
+
+                    var scrollDiv = document.getElementById("details").offsetTop - 100;
+                    window.scrollTo({ top: scrollDiv, behavior: 'smooth'});
                 } else {
                     document.getElementById('hidden-detail').style.display = 'block';
                     document.getElementById('show-detail-btn').innerHTML = 'Cerrar';

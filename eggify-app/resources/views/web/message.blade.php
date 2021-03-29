@@ -4,7 +4,7 @@
     <header class="header-small">
         <div class="d-flex position-relative mb-2">
             <a class="link-icon" href="{{ route('web.inbox') }}"><i class="la la-arrow-left mr-2"></i></a>
-            <a class="m-auto" href="{{ route('web.index') }}"><img src="/assets/img/logo-color.png"></a>
+            <a class="m-auto" href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}"><img src="/assets/img/logo-color.png"></a>
         </div>
     </header>
     <main>

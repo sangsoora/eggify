@@ -20,6 +20,7 @@ class Provider extends Model
         'location',
         'starting',
         'policy_consent',
+        'visible',
         'user_id',
         'provider_type_id',
         'provider_category_id',
@@ -93,5 +94,15 @@ class Provider extends Model
         return $query->whereHas('provider_type', function ($provider_type) {
             $provider_type->producer();
         });
+    }
+
+    public function scopeVisible($query)
+    {
+        return $query->where('visible', 1);
+    }
+
+    public function isVisible($query)
+    {
+        return ($this->visible != null && $this->visible);
     }
 }

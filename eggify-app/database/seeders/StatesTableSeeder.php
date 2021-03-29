@@ -18,7 +18,7 @@ class StatesTableSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
 
         DB::table('states')->truncate();
-        DB::insert('insert into states (id,name,country_id) values (?,?,?)', [1, 'Barcelona', 1]);
+        DB::insert('insert into states (id,code,name,country_id) values (?,?,?,?)', [1, 'BA','Barcelona', 1]);
 
         Schema::enableForeignKeyConstraints();
     }
