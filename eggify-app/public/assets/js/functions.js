@@ -1,7 +1,7 @@
 var myFunctions = {
-    
+
     goTop: function() {
-    
+
         $('html, body').animate({
             scrollTop: 0
         }, 800, function(){
@@ -9,23 +9,23 @@ var myFunctions = {
         });
 
     },
-    
+
     splash: function() {
-        
+
         setTimeout(function(){
             $('#splash').fadeOut();
         }, 2000);
-        
+
     },
-    
+
     anchor: function() {
-        
+
         $('a').on('click', function(event) {
             var hash = this.hash;
-            
+
             if (hash) {
                 event.preventDefault();
-                
+
                 var $that = $(this);
                 var $closest = $that.parent();
 
@@ -37,82 +37,113 @@ var myFunctions = {
                 }, 800, function(){
                     //window.location.hash = hash;
                 });
-            
+
             }
         });
-        
+
     },
-    
+
     collapseParentNext: function(el) {
-        
+
         $(el).next().toggle('blind');
-        
+
     },
 
     toolsBar: function() {
-        
+
         if ($('body').hasClass('loged-provider')) {
             $('#tools-bar-provider').css('display', 'flex');
         } else {
             $('#tools-bar-general').css('display', 'flex');
         }
-        
+
     },
-    
+
     imagePreview: function(input) {
-        
+
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             var $that = $(input);
             var $preview = $that.parent();
             var $buttonUpload = $that.next();
             var $buttonTrash = $preview.find('button');
-            
+
             reader.onload = function(e) {
                 $preview.css('background', `url('${e.target.result}') center / cover no-repeat`);
                 $preview.hide();
                 $preview.fadeIn(500);
             }
-            
+
             reader.readAsDataURL(input.files[0]);
-            
+
             $buttonUpload.hide();
             $buttonTrash.show();
         }
-        
+
     },
-    
+
+    imageGalleryPreview: function(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            var $that = $(input);
+            var $preview = $that.parent();
+            var $buttonUpload = $that.next();
+            var $buttonTrash = $preview.find('button');
+
+            var id = $that.data('id');
+            var $removedInput = $preview.find(`#logo-removed-${id}`);
+
+            reader.onload = function(e) {
+                $preview.css('background', `url('${e.target.result}') center / cover no-repeat`);
+                $preview.hide();
+                $preview.fadeIn(500);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+
+            $buttonUpload.hide();
+            $buttonTrash.show();
+            //$removedInput.val(0);
+        }
+
+    },
+
     imageTrash: function(el) {
         var $that = $(el);
         var $preview = $that.parent();
         var $input = $preview.find('input');
         var $buttonUpload = $input.next('label');
         var $buttonTrash = $preview.find('button');
-        
+
+        var id = $that.data('id');
+        var $removedInput = $preview.find(`#logo-removed-${id}`);
+
         $preview.css('background', '');
         $input.val('');
         $buttonUpload.show();
         $buttonTrash.hide();
+        $removedInput.val(1);
     },
-    
+
     imageAdd: function(el) {
         var $that = $(el);
         var $wp = $that.closest('wp');
-        
+
         // Add other img preview whith trash button
-        
+
         // Trigger input file select image
-        
+
     },
-    
+
     imageRemove: function(el) {
         var $that = $(el);
         var $wp = $that.closest('wp');
-        
-        // 
-        
+
+        //
+
     },
-    
+
     ajax: function (data, method, action, $button, testMode = false) {
 
         var beforeButtonText = $button.text();
@@ -120,13 +151,13 @@ var myFunctions = {
         // Spinner ON
         $button.prop("disabled", true);
         $button.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Cargando...');
-        
+
         if (testMode) {
             setTimeout(function() {
                 // Spinner OFF
                 $button.html(beforeButtonText);
             }, 2000);
-            
+
             return true;
         } else {
 
@@ -152,9 +183,24 @@ var myFunctions = {
                     return false;
                 }
             });
-            
+
         }
 
+    },
+
+    showPassword: function(el) {
+        let $that = $(el);
+        let $input = $that.parent().find('input');
+
+        if ($input.attr('type') === 'password') {
+            $that.removeClass('la-eye-slash');
+            $that.addClass('la-eye');
+            $input.attr('type', 'text');
+        } else {
+            $that.removeClass('la-eye');
+            $that.addClass('la-eye-slash');
+            $input.attr('type', 'password');
+        }
     }
-    
+
 }

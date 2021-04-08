@@ -33,7 +33,7 @@ class OrderController extends Controller
 
     public function data(Datatables $datatables)
     {
-        $query = Budget::query();
+        $query = Budget::orderByDesc('created_at')->get();
 
         return $datatables->of($query)
             ->addColumn('action', 'admin.pages.order.partials.actions')

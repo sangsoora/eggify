@@ -9,8 +9,6 @@
             </div>
         @elseif (\App\Models\User::findOrFail(auth()->user()->id)->isProvider())
             <div class="row m-auto" id="tools-bar-provider" style="display: flex">
-
-
                 @if ($provider_not_visible)
                     <div class="col-12 text-center p-2 mb-1 text-warning">¡Perfil pendiente de validación!</div>
                 @endif

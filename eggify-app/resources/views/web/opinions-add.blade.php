@@ -117,7 +117,7 @@
                 </div>
             </div>
         </section>
-        <section class="container">
+        {{--<section class="container">
             <div class="row">
                 <div class="col-12">
                     <h5 class="title-action">Una imágen vale más que mil palabras. Sube tus fotos.</h5>
@@ -131,7 +131,7 @@
                     <button class="btn btn-secondary rounded-pill form-control" type="button">Desde la galería</button>
                 </div>
             </div>
-        </section>
+        </section>--}}
         <section class="container">
             <div class="row">
                 <div class="col-12 text-center">

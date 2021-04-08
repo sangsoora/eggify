@@ -3,7 +3,9 @@
 @section('content')
     @include('web.layout.sidebar')
     <header class="header-small mobile">
-        <div class="d-flex position-relative"><a class="link-icon" href="{{ route('web.result', [ 'category' => $provider->provider_category->id, 'city' => $provider->postal_code->city->id ]) }}"><i class="la la-arrow-left mr-2"></i></a><a class="m-auto" href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}"><img src="/assets/img/logo-color.png"></a></div>
+        <div class="d-flex position-relative"><a class="link-icon" href="{{ route('web.result', [ 'category' => $provider->provider_category->id, 'city' => $provider->postal_code->city->id ]) }}"><i class="la la-arrow-left mr-2"></i></a><a class="m-auto"
+                                                                                                                                                                                                                                                href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}"><img
+                    src="/assets/img/logo-color.png"></a></div>
         <div class="nav-anchor mt-3"><a class="active" href="#information">Información</a><a href="#photos">Fotos</a><a href="#opinions-rating">Opiniones</a><a href="#map">Mapa</a></div>
     </header>
     <header class="d-flex header-opacity justify-content-between" id="header-desktop">
@@ -30,19 +32,19 @@
                 {{--<span class="tag">Premium</span>
                 <span class="share"><i class="la la-share-alt"></i></span>
                 <span class="like"><i class="la la-heart"></i></span>--}}
-                <div class="carousel slide" data-ride="carousel" data-interval="false" data-pause="false" data-keyboard="false">
+                <div class="carousel slide" data-ride="carousel" data-interval="false" data-pause="false" data-keyboard="true">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="w-100 d-block" src="{{ $provider->provider_company != null ? $provider->provider_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}" alt="{{ $provider->provider_company != null ? $provider->provider_company->name : '' }}">
-                        </div>
-                        {{--<div class="carousel-item"><img class="w-100 d-block" src="/assets/img/slider-comunity.png" alt="Slide Image"></div>
-                        <div class="carousel-item"><img class="w-100 d-block" src="/assets/img/slider-providers.png" alt="Slide Image"></div>--}}
+                        @foreach($providerImages as $i => $image)
+                            <div class="carousel-item {{ $i == 0 ? 'active' : '' }}">
+                                <img class="w-100 d-block" src="{{ $image->getUrlImageAttribute() }}" alt="" height="240px">
+                            </div>
+                        @endforeach
                     </div>
                     <div><a class="carousel-control-prev" href="#" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#" role="button" data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
                     <ol class="carousel-indicators">
-                        <li data-target="#" data-slide-to="0" class="active"></li>
-                        {{--<li data-target="#" data-slide-to="1"></li>
-                        <li data-target="#" data-slide-to="2"></li>--}}
+                        @foreach($providerImages as $i => $image)
+                            <li data-target="#" data-slide-to="{{ $i }}" class="{{ $i == 0 ? 'active' : '' }}"></li>
+                        @endforeach
                     </ol>
                 </div>
                 <div class="card-body mobile">
@@ -305,16 +307,16 @@
                 </div>
             </div>
         </section>
-        <section id="photos" class="container-fluid">
+        {{--<section id="photos" class="container-fluid">
             <h5 class="title-action">Fotos de usuarios</h5>
             <div class="d-flex card-custom card-custom-medium">
-                <div class="card text-center"><a href="#"><img class="radius" src="/assets/img/slider-providers.png"></a></div>
-                <div class="card text-center"><a href="#"><img class="radius" src="/assets/img/slider-comunity.png"></a></div>
-                <div class="card text-center"><a href="#"><img class="radius" src="/assets/img/slider-blog.png"></a></div>
-                <div class="card text-center"><a href="#"><img class="radius" src="/assets/img/slider-providers.png"></a></div>
+                <div class="card text-center"><a data-fancybox="gallery" href="/assets/img/slider-providers.png"><img class="radius" src="/assets/img/slider-providers.png"></a></div>
+                <div class="card text-center"><a data-fancybox="gallery" href="/assets/img/slider-comunity.png"><img class="radius" src="/assets/img/slider-comunity.png"></a></div>
+                <div class="card text-center"><a data-fancybox="gallery" href="/assets/img/slider-blog.png"><img class="radius" src="/assets/img/slider-blog.png"></a></div>
+                <div class="card text-center"><a data-fancybox="gallery" href="/assets/img/slider-providers.png"><img class="radius" src="/assets/img/slider-providers.png"></a></div>
                 <div class="card card-end"></div>
             </div>
-        </section>
+        </section>--}}
         <section id="opinions-rating" class="container mobile">
             <div class="row">
                 <div class="col-4">
@@ -465,7 +467,7 @@
                     document.getElementById('show-detail-btn').innerHTML = 'Mostrar más detalles';
 
                     var scrollDiv = document.getElementById("details").offsetTop - 100;
-                    window.scrollTo({ top: scrollDiv, behavior: 'smooth'});
+                    window.scrollTo({top: scrollDiv, behavior: 'smooth'});
                 } else {
                     document.getElementById('hidden-detail').style.display = 'block';
                     document.getElementById('show-detail-btn').innerHTML = 'Cerrar';

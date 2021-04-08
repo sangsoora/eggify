@@ -658,6 +658,10 @@ main, .sidenav, .side {
   padding-bottom: 55px;
 }
 
+.footer-message main {
+    padding-bottom: 100px;
+}
+
 #overlay {
   position: fixed;
   /* Sit on top of the page content */

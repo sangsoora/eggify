@@ -133,8 +133,8 @@
             </section>
             <section>
                 <div class="banner-bottom text-center">
-                    <h2>¿Eres un proveedor? Haz parte de nosotros!</h2>
-                    <a class="btn btn-secondary rounded-pill" href="{{ route('web.about-provider') }}">Conoce más y regístrate!</a>
+                    <h2>¿Eres un proveedor? ¡Únete a Eggify!</h2>
+                    <a class="btn btn-secondary rounded-pill" href="{{ route('web.signup-provider') }}">Registrate!</a>
                 </div>
             </section>
         @endif

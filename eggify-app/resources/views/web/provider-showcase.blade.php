@@ -13,12 +13,12 @@
             <button class="btn mr-auto p-0" type="button"><a href="/"><img src="/assets/img/logo-color.png"></a></button>
         </div>
         <div class="p-2 align-self-center nav-menu-desktop">
-          <a href="{{ route('web.about') }}" class="mr-5">Sobre nosotros</a>
-          <a href="{{ route('web.search.provider') }}" class="mr-5">Proveedores</a>
-          @if (auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser())
-              <a href="{{ route('web.inbox') }}" class="mr-5">Inbox</a>
-          @endif
-          <a href="https://community.eggify.net/" class="mr-5">Comunidad</a>
+            <a href="{{ route('web.about') }}" class="mr-5">Sobre nosotros</a>
+            <a href="{{ route('web.search.provider') }}" class="mr-5">Proveedores</a>
+            @if (auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser())
+                <a href="{{ route('web.inbox') }}" class="mr-5">Inbox</a>
+            @endif
+            <a href="https://community.eggify.net/" class="mr-5">Comunidad</a>
         </div>
         @if (!(auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isUser()))
             <div id="header-links" class="p-2 align-self-center"><a href="javascript:void(0)" onclick="sidepopuplogin.open()">Acceder</a><span class="mx-1">/</span><a href="javascript:void(0)" onclick="sidepopuplogin.open()">Regístrate</a></div>
@@ -92,18 +92,36 @@
         </section>
         <section class="container">
             <h5 class="title-action">Sube tus fotos</h5>
-            <div class="row wp">
-                <div class="col-6">
-                    <div id="img-preview" class="img-upload">
-                        <button class="btn btn-secondary btn-add" type="button" onclick="myFunctions.imageAdd(this)"><i class="la la-plus"></i></button>
+
+
+                @for($i = 0; $i < 4; $i++)
+
+                    @if($i % 2 == 0)
+                        <div class="row wp mt-3">
+                    @endif
+
+                    <div class="col-6">
+
+                        @if($providerImages != null && count($providerImages) - 1 >= $i)
+                            <div id="img-preview" class="img-upload" style="background: url('{!! getUrlResource('/provider/' . $user->provider->id . '/' . $providerImages[$i]['name']) !!}') center / cover no-repeat">
+                        @else
+                            <div id="img-preview" class="img-upload">
+                        @endif
+                            <input type="file" id="logo-upload-{{ $i }}" class="img-input img-input-gallery" name="logo[]" data-id="{{ $i }}" accept="image/*">
+                            <label class="btn btn-secondary" for="logo-upload-{{ $i }}" style="{{ ($providerImages != null && count($providerImages) - 1 >= $i ? 'display: none' : '') }}"><i class="la la-plus"></i></label>
+                            <button class="btn btn-secondary btn-trash" style="{{ ($providerImages != null && count($providerImages) - 1 >= $i ? 'display: block' : '') }}" type="button" data-id="{{ $i }}" onclick="myFunctions.imageTrash(this)"><i class="la la-trash" style="vertical-align: top;"></i></button>
+                            <input type="hidden" id="logo-removed-{{ $i }}" name="logoremoved[]" value="0" />
+                        </div>
+
                     </div>
-                </div>
-                <div class="col-6">
-                    <div id="img-preview-1" class="img-upload"><input type="file" id="logo-upload-1" class="img-input" name="logo" accept="image/*"><label class="btn btn-secondary" for="logo-upload"><i class="la la-plus"></i></label>
-                        <button class="btn btn-secondary btn-trash" type="button" onclick="myFunctions.imageTrash(this)"><i class="la la-trash" style="vertical-align: top;"></i></button>
-                    </div>
-                </div>
-            </div>
+
+                    @if($i % 2 != 0)
+                        </div>
+                    @endif
+
+                @endfor
+
+
         </section>
         <section id="opinions-rating" class="container mobile">
             <div class="row">
@@ -197,8 +215,8 @@
                                 </div>
                                 <div class="col-6 text">
                                     <span class="d-block title">{{ $el->rating->user->name }}</span>
-                                    <span class="d-block">{{ $el->rating->user->operator->operator_position->name }}</span>
-                                    <span class="d-block">{{ $el->rating->user->operator->operator_company->name }}</span>
+                                    <span class="d-block">{{ $el->rating->user->operator->operator_position != null ? $el->rating->user->operator->operator_position->name : '-' }}</span>
+                                    <span class="d-block">{{ $el->rating->user->operator->operator_company != null ? $el->rating->user->operator->operator_company->name : '-' }}</span>
                                 </div>
                                 <div class="col-3 text">
                                     <span class="d-block date-from">{{ ucfirst(\Carbon\Carbon::parse($el->rating->created_at)->diffForHumans()) }}</span>
@@ -243,7 +261,8 @@
         <button class="btn btn-secondary form-control rounded-pill mt-3 mb-3" type="submit">Guardar</button>
         <div class="modal fade" role="dialog" tabindex="-1" id="signup-modal-done">
             <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content"><div class="modal-header"><a href="/" class="close" aria-label="Close"><span aria-hidden="true">×</span></a></div>
+                <div class="modal-content">
+                    <div class="modal-header"><a href="/" class="close" aria-label="Close"><span aria-hidden="true">×</span></a></div>
                     <div class="modal-body">
                         <p>Perfil actualizado correctamente.</p>
                     </div>
@@ -256,11 +275,15 @@
         <div class="modal fade" role="dialog" tabindex="-1" id="signup-modal-error">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                    <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
                     <div class="modal-body">
                         <p>Ups! Algo no ha ido según lo esperado. Inténtalo de nuevo más tarde o contacta con nosotros. Perdona las molestias.</p>
                     </div>
-                    <div class="modal-footer"><button class="btn btn-secondary rounded-pill w-100 m-auto" type="button" data-dismiss="modal">Cerrar</button></div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary rounded-pill w-100 m-auto" type="button" data-dismiss="modal">Cerrar</button>
+                    </div>
                 </div>
             </div>
         </div>

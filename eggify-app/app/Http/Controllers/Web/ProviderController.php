@@ -7,6 +7,7 @@ use App\Http\Helpers\Helper;
 use App\Models\Note;
 use App\Models\OperatorCompany;
 use App\Models\Provider;
+use App\Models\ProviderImages;
 use App\Models\Rating;
 use App\Models\RatingCriteria;
 use App\Models\RatingProvider;
@@ -61,7 +62,9 @@ class ProviderController extends Controller
 
         $ratingsProvider = RatingProvider::where('provider_id', $provider->id)->inRandomOrder()->limit(2)->get();
 
-        return view('web.provider', compact('bodyClass', 'provider', 'note', 'ratingsCriteria', 'ratingsProvider'));
+        $providerImages = ProviderImages::where('provider_id', $provider->id)->get();
+
+        return view('web.provider', compact('bodyClass', 'provider', 'note', 'ratingsCriteria', 'ratingsProvider', 'providerImages'));
     }
 
     public function dashboard(Request $request)
@@ -128,7 +131,6 @@ class ProviderController extends Controller
                 }
             }
 
-
             $criteria['rating'] = 0;
 
             if ($ratingSum != 0 && $ratingCount != 0) {
@@ -140,7 +142,10 @@ class ProviderController extends Controller
 
         $ratingsProvider = RatingProvider::inRandomOrder()->limit(2)->get();
 
-        return view('web.provider-showcase', compact('bodyClass', 'user', 'ratingsCriteria', 'ratingsProvider'));
+        // Images
+        $providerImages = ProviderImages::where('provider_id', $user->provider->id)->get()->toArray();
+
+        return view('web.provider-showcase', compact('bodyClass', 'user', 'ratingsCriteria', 'ratingsProvider', 'providerImages'));
     }
 
     public function showcaseUpdate(Request $request)
@@ -149,14 +154,47 @@ class ProviderController extends Controller
             return redirect()->route('web.index');
         }
 
+        $this->validate($request, [
+            'about' => 'profane',
+            'description' => 'profane',
+            'usp' => 'profane'
+        ]);
+
         $user = User::findOrFail(auth()->user()->id);
 
-        // TODO: [jojacafe] Images provider 1
-        if ($request->hasFile('logo')) {
-            // File
-            $filename = str_slug($user->operator->name) . '-' . str_slug($user->operator->surname) . '.' . $request->logo->getClientOriginalExtension();
+        // Images
 
-            $arrCompany['logo'] = $filename;
+        // - Delete images
+        $providerImages = ProviderImages::where('provider_id', $user->provider->id)->get();
+
+        foreach ($providerImages as $i => $image) {
+
+            if ($request->logoremoved[$i] == 1) {
+                $image->deleteImage();
+                $image->delete();
+            }
+
+        }
+
+        // - Save images
+        if ($request->hasFile('logo')) {
+
+            foreach ($request->logo as $image) {
+
+                // File
+                $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+
+                // Upload image
+                $image = Helper::saveImage($image, $user->provider->getFolder(), $filename);
+
+                // Db
+                ProviderImages::create([
+                    'name' => $filename,
+                    'provider_id' => $user->provider->id,
+                ]);
+
+            }
+
         }
 
         $request->merge([
@@ -164,12 +202,6 @@ class ProviderController extends Controller
         ]);
 
         $user->provider->update($request->all());
-
-        // TODO: [jojacafe] Images provider 2
-        if ($request->hasFile('logo')) {
-            // Upload image
-            $image = Helper::saveImage($request->logo, $user->operator->operator_company->getFolder(), $filename);
-        }
 
         return response()->json(array(
             'status' => 200,

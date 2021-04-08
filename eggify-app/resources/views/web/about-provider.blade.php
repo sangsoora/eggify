@@ -129,7 +129,24 @@
                 <div class="card card-end"></div>
             </div>
         </section>
-        <section class="container bg-primary mobile">
+        @if (!(auth()->check()))
+            <section class="container bg-primary mobile">
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="text-white mb-3 title-action"><strong>¿Eres un proveedor?</strong></h5>
+                        <p class="text-white">Crea con nosotros tu escaparate y consigue más clientes!</p>
+                        <a class="btn btn-secondary rounded-pill form-control" href="{{ route('web.signup-provider') }}">Registrate!</a>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="banner-bottom text-center">
+                    <h2>¿Eres un proveedor? ¡Únete a Eggify!</h2>
+                    <a class="btn btn-secondary rounded-pill" href="{{ route('web.signup-provider') }}">Registrate!</a>
+                </div>
+            </section>
+        @endif
+        {{--<section class="container bg-primary mobile">
             <div class="row">
                 <div class="col-12">
                     <h5 class="text-white mb-3 title-action"><strong>Servicios premium</strong></h5>
@@ -137,12 +154,6 @@
                     <button class="btn btn-secondary rounded-pill form-control" type="button">Ver planes</button>
                 </div>
             </div>
-        </section>
-        <section>
-                <div class="banner-bottom text-center">
-                    <h2>¿Eres un proveedor? Haz parte de nosotros!</h2>
-                    <a class="btn btn-secondary rounded-pill" href="{{ route('web.about-provider') }}">Conoce más y regístrate!</a>
-                </div>
-            </section>
+        </section>--}}
     </main>
 @endsection

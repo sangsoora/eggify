@@ -50,14 +50,14 @@
             <div class="row mb-3">
                 <div class="col-12">
                     <h5 class="title-action text-center mb-3">Mi organizador</h5>
-                    <div class="row resume-elements mb-3">
+                    {{--<div class="row resume-elements mb-3">
                         <div class="col-6"><a href="#"><span class="color-red">1</span>Solicitudes pendientes</a></div>
                         <div class="col-6"><a href="#"><span class="color-yellow">2</span>Presupuestos enviados</a></div>
                     </div>
                     <div class="row resume-elements">
                         <div class="col-6"><a href="#"><span class="color-green">1</span>Pedidos activos</a></div>
                         <div class="col-6"><a href="#"><span class="color-blue">30</span>Mis clientes</a></div>
-                    </div>
+                    </div>--}}
                 </div>
             </div>
         </section>

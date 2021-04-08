@@ -15,11 +15,12 @@
     <link rel="stylesheet" href="/assets/fonts/fontawesome5-overrides.min.css">
     <link rel="stylesheet" href="/assets/css/Section.css">
     <link rel="stylesheet" href="/assets/css/styles.compiled.css">
+    <link rel="stylesheet" href="/assets/css/jquery.fancybox.min.css" />
     @stack('plugin-styles')
     @stack('style')
 </head>
 
-<body class="{{ $bodyClass }}">
+<body class="{{ $provider_not_visible ? sprintf('footer-message %s', $bodyClass) : $bodyClass }}">
 @yield('content')
 @include('web.layout.footer')
 
@@ -30,6 +31,7 @@
 <script src="/assets/js/events.js"></script>
 <script src="/assets/js/functions.js"></script>
 <script src="/assets/js/side.js"></script>
+<script src="/assets/js/jquery.fancybox.min.js"></script>
 @stack('plugin-scripts')
 @stack('custom-scripts')
 </body>

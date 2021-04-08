@@ -21,7 +21,7 @@
                     <input id="email" type="email" class="form-control" name="email" placeholder="Email" required><i class="la la-envelope"></i>
                 </div>
                 <div class="form-group input-text-icon">
-                    <input id="password" type="password" class="form-control" name="password" placeholder="Contraseña" required><i class="la la-eye-slash"></i>
+                    <input id="password" type="password" class="form-control" style="font-size: 1rem" name="password" placeholder="Contraseña" required><i class="la la-eye-slash" style="pointer-events: all" onclick="myFunctions.showPassword(this)"></i>
                 </div>
                 <a class="d-block text-underline mb-3" href="#">¿Has olvidado tu contraseña?</a>
                 <button class="btn btn-secondary form-control rounded-pill" type="submit">Acceder</button>

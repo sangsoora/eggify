@@ -52,7 +52,7 @@
                     <div class="col px-4">
                         <h5 class="text-white mb-3">Faster · Better · Stronger</h5>
                         <div id="home-searcher" class="wp-search">
-                            <input class="border rounded-pill form-control form-control-sm" type="text" name="text-search" placeholder="¿Qué buscas?">
+                            <input id="press-enter-search" class="border rounded-pill form-control form-control-sm" type="text" name="text-search" placeholder="¿Qué buscas?">
                             <button class="btn btn-primary rounded-pill" type="button" onclick="sidepopup.open(this)"><i class="la la-search px-3"></i></button>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                         <h3>Faster · Better · Stronger</h3>
                         <p class="text-white mb-3">Un centro profesional donde los operadores y<br>proveedores de F&B pueden encontrarse</p>
                         <div class="wp-search col-6 offset-3 mt-5" id="home-searcher">
-                            <input class="border rounded-pill form-control form-control-sm" type="text" name="text-search" placeholder="¿Qué buscas?">
+                            <input id="press-enter-search" class="border rounded-pill form-control form-control-sm" type="text" name="text-search" placeholder="¿Qué buscas?">
                             <button class="btn btn-primary rounded-pill" type="button" onclick="sidepopup.open(this)"><i class="la la-search px-3"></i></button>
                         </div>
                     </div>
@@ -232,7 +232,7 @@
             <section class="container mobile">
                 <div class="row">
                     <div class="col">
-                        <h5 class="title-action mb-3">¿Eres un proveedor?<br>Haz parte de nosotros!</h5>
+                        <h5 class="title-action mb-3">¿Eres un proveedor?<br>¡Únete a Eggify!</h5>
                         <a href="{{ route('web.about-provider') }}">
                             <button class="btn btn-secondary form-control rounded-pill" type="button">Conoce más y regístrate!</button>
                         </a>
@@ -241,10 +241,24 @@
             </section>
             <section>
                 <div class="banner-bottom text-center">
-                    <h2>¿Eres un proveedor? Haz parte de nosotros!</h2>
+                    <h2>¿Eres un proveedor? ¡Únete a Eggify!</h2>
                     <a class="btn btn-secondary rounded-pill" href="{{ route('web.about-provider') }}">Conoce más y regístrate!</a>
                 </div>
             </section>
         @endif
     </main>
 @endsection
+
+@push('custom-scripts')
+    <script type="text/javascript">
+        document.getElementById("press-enter-search").addEventListener("keypress", function(event) {
+            // Number 13 is the "Enter" key on the keyboard
+            if (event.keyCode === 13) {
+                // Cancel the default action, if needed
+                event.preventDefault();
+                // Trigger the button element with a click
+                $(event.target).next().trigger('click');
+            }
+        });
+    </script>
+@endpush

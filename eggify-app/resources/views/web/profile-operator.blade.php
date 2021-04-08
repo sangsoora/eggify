@@ -27,6 +27,14 @@
         <button class="btn btn-nav" type="button" onclick="sidenav.open()"><i class="far fa-user"></i></button>
     </header>
     <main class="main-desktop">
+        <div class="d-flex provider-header-desktop">
+            <div class="mr-3 profile-img">
+                <img src="{{ $user->operator->provider_company != null ? $user->operator->provider_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}" alt="{{ $user->operator->name }}">
+            </div>
+            <div class="align-self-center">
+                <h5 class="m-0">{{ $user->operator->name }}</h5>
+            </div>
+        </div>
         <section class="container">
             <div class="row mb-3">
                 <div class="col-12">
@@ -37,15 +45,15 @@
             <div class="row mb-3">
                 <div class="col-12">
                     <h5 class="title-action mb-2">Ajustes</h5>
-                    <div><a class="d-block border-bottom" href="#">Notificaciones</a></div>
-                    <div class="mt-2"><a class="d-block border-bottom" href="#">Mejora tu plan</a></div>
-                    <div class="mt-2"><a class="d-block border-bottom" href="#">Tu método de pago</a></div>
+                    <div><a class="d-block border-bottom" href="{{ route('web.inbox') }}">Notificaciones</a></div>
+                    {{--<div class="mt-2"><a class="d-block border-bottom" href="#">Mejora tu plan</a></div>
+                    <div class="mt-2"><a class="d-block border-bottom" href="#">Tu método de pago</a></div>--}}
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
                     <h5 class="title-action mb-2">Soporte</h5>
-                    <div><a class="d-block border-bottom" href="#">Ayuda</a></div>
+                    {{--<div><a class="d-block border-bottom" href="#">Ayuda</a></div>--}}
                     <div class="mt-2"><a class="d-block border-bottom" href="https://www.eggify.net/terminos-y-condiciones">Términos y condiciones</a></div>
                     <div class="mt-2"><a class="d-block border-bottom" href="https://www.eggify.net/copy-of-terminos-y-condiciones">Política de privacidad</a></div>
                     <div class="mt-2"><a class="d-block border-bottom" href="{{ route('web.user.logout') }}">Cerrar sesión</a></div>

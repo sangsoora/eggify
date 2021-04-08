@@ -301,7 +301,13 @@ $('#edit-provider-showcase').submit(function (e) {
             $button.prop("disabled", false);
             $button.html(beforeButtonText);
 
-            $('#signup-modal-error').modal("show");
+            if (a.status == 422) {
+                $('#signup-modal-error').find('.modal-body p').text("Revisa las descripciones, hay palabras vulgares!");
+                $('#signup-modal-error').modal("show");
+                $button.prop("disabled", false);
+            } else {
+                $('#signup-modal-error').modal("show");
+            }
         }
     });
 
@@ -495,7 +501,51 @@ $('#message-add').submit(function (e) {
 
 });
 
+$('#login-client').submit(function (e) {
+
+    e.preventDefault();
+
+    var fd = new FormData($(this)[0]);
+    var method = $(this).attr('method');
+    var action = $(this).attr('action');
+    var $button = $(this).find('button[type=submit]');
+    var beforeButtonText = 'Acceder';
+
+    // Spinner ON
+    $button.prop("disabled", true);
+    $button.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Cargando...');
+
+    $.ajax({
+        data: fd,
+        method: method,
+        url: action,
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        processData: false,
+        contentType: false,
+        success: function (data) {
+            if (data.status == 200) {
+                window.location.href = data.link;
+            } else if (data.status == 500) {
+                // Spinner OFF
+                $button.html(data.message);
+                $button.prop("disabled", false);
+            }
+        },
+        error: function (a, b, c) {
+            // Spinner OFF
+            $button.html('Error!');
+            $button.prop("disabled", false);
+        }
+    });
+
+});
+
 // Profile
 $(".img-input").change(function () {
     myFunctions.imagePreview(this);
+});
+
+// Images
+$(".img-input-gallery").change(function () {
+    myFunctions.imageGalleryPreview(this);
 });

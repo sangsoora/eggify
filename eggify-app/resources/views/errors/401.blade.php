@@ -1,17 +1,62 @@
-@extends('admin.layout.master2')
+<!DOCTYPE html>
+<html>
 
-@section('content')
-    <div class="page-content d-flex align-items-center justify-content-center">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
+    <title>Eggify</title>
 
-        <div class="row w-100 mx-0 auth-page">
-            <div class="col-md-8 col-xl-6 mx-auto d-flex flex-column align-items-center">
-                <img src="{{ url('assets/images/404.svg') }}" class="img-fluid mb-2" alt="404">
-                <h1 class="font-weight-bold mb-22 mt-2 tx-80 text-muted">401</h1>
-                <h4 class="mb-2">Page Not Found</h4>
-                <h6 class="text-muted mb-3 text-center">Oopps!! The page you were looking for doesn't exist.</h6>
-                <a href="{{ url('/') }}" class="btn btn-primary">Back to home</a>
-            </div>
-        </div>
+    <style type="text/css">
+        * {
+            transition: all 0.6s;
+        }
 
+        html {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: #888;
+            margin: 0;
+        }
+
+        #main {
+            display: table;
+            width: 100%;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .fof {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .fof h1 {
+            font-size: 50px;
+            display: inline-block;
+            padding-right: 12px;
+            animation: type .5s alternate infinite;
+        }
+
+        @keyframes type {
+            from {
+                box-shadow: inset -3px 0px 0px #888;
+            }
+            to {
+                box-shadow: inset -3px 0px 0px transparent;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div id="main">
+    <div class="fof">
+        <h1>Error 401</h1>
     </div>
-@endsection
+</div>
+</body>
+</html>

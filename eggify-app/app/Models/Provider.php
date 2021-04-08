@@ -75,6 +75,11 @@ class Provider extends Model
         return $this->hasOne(ProviderCompany::class, 'provider_id');
     }
 
+    public function images()
+    {
+        return $this->hasMany(ProviderImages::class, 'provider_id', 'id');
+    }
+
     public function scopeGetByCity($query, $id)
     {
         return $query->whereHas('providers', function ($query) use ($id) {
@@ -104,5 +109,10 @@ class Provider extends Model
     public function isVisible($query)
     {
         return ($this->visible != null && $this->visible);
+    }
+
+    public function getFolder()
+    {
+        return '/provider/' . $this->id . '/';
     }
 }

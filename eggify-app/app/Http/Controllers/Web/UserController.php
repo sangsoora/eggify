@@ -201,14 +201,30 @@ class UserController extends Controller
             // Authentication passed...
             $user = User::findOrFail(auth()->user()->id);
             if ($user->isProvider()) {
-                return redirect()->route('web.provider-dashboard');
+                return response()->json(array(
+                    'status' => 200,
+                    'message' => '',
+                    'link' => route('web.provider-dashboard')
+                ));
             } else {
-                return redirect()->route('web.index');
+                return response()->json(array(
+                    'status' => 200,
+                    'message' => '',
+                    'link' => route('web.index')
+                ));
             }
-            // return redirect()->route('web.index');
+        } else {
+            return response()->json(array(
+                'status' => 500,
+                'message' => 'Login incorrecto!'
+            ));
         }
 
-        return redirect()->route('web.index');
+        return response()->json(array(
+            'status' => 200,
+            'message' => '',
+            'link' => route('web.index')
+        ));
     }
 
     public function logout(Request $request)
