@@ -23,8 +23,6 @@ class SocialController extends Controller
             return redirect()->route('web.index');
         } else {
             $name = $userSocial->getName();
-            $firstName = $userSocial->user['firstName']['localized']['en_US'];
-            $lastName = $userSocial->user['lastName']['localized']['en_US'];
             $email = $userSocial->getEmail();
             $user = User::create([
                 'name' => $name,
@@ -34,8 +32,8 @@ class SocialController extends Controller
                 'user_type_id' => 5
             ]);
             $operator = Operator::create([
-                'name' => $firstName,
-                'surname' => $lastName,
+                'name' => $name,
+                'surname' => $name,
                 'user_id' => $user->id,
                 'phone' => '',
                 'address' => '',
