@@ -203,6 +203,16 @@ $('#edit-operator').submit(function (e) {
         hasError = true;
         $('#validation-modal').find('.modal-body p').text('Por favor, selecciona la cantidad de empleados de tu compañía');
     }
+
+    if (!hasError && !$('#jobs button.active').length) {
+        hasError = true;
+        $('#validation-modal').find('.modal-body p').text('Por favor, selecciona donde trabajas');
+    }
+
+    if (!hasError && !$('.job-type button.active').length) {
+        hasError = true;
+        $('#validation-modal').find('.modal-body p').text('Por favor, selecciona el tipo de trabajo');
+    }
     // ###
 
     if (hasError) {
@@ -220,7 +230,8 @@ $('#edit-operator').submit(function (e) {
 
         // Aditional data
         fd.append('operator_employees_id', $('#company-employees button.active').data('id'));
-
+        fd.append('operator_job_id', $('#jobs button.active').data('id'));
+        fd.append('operator_job_tag_id', $('.job-type button.active').data('id'));
         var beforeButtonText = $button.text();
 
         console.log(Object.fromEntries(fd));

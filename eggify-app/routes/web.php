@@ -28,6 +28,11 @@ Route::group(['as' => 'web.'], function () {
     Route::post('/opinions/{id}/add/store', 'Web\OpinionsController@addStore')->name('opinions.add.store');
     Route::get('/about', function () { $bodyClass = ''; return view('web.about', compact('bodyClass')); })->name('about');
 
+    Route::get('/auth/redirect', 'Web\SocialController@redirect')->name('redirect');
+
+    Route::get('/auth/callback','Web\SocialController@Callback')->name('callback');
+
+
     Route::get('/about-provider', function () { $bodyClass = ''; return view('web.about-provider', compact('bodyClass')); })->name('about-provider');
 
     Route::get('/signup-client', 'Web\UserController@signUpOperator')->name('signup-client');
@@ -60,5 +65,7 @@ Route::group(['as' => 'web.'], function () {
     Route::get('/inbox/{id}', 'Web\InboxController@messageGet')->name('inbox.get');
     Route::post('/inbox/{id}/store', 'Web\InboxController@messageStore')->name('inbox.store');
 });
+
+
 
 Auth::routes();

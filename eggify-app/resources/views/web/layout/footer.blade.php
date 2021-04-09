@@ -28,7 +28,7 @@
 @endif
 <footer class="footer-desktop justify-content-between">
     <div class="footer-columns">
-        <button class="btn mr-auto p-0" type="button"><a href="/"><img src="/assets/img/logo-footer.svg"></a></button>
+        <button class="btn mr-auto p-0" type="button"><a href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}"><img src="/assets/img/logo-footer.svg"></a></button>
     </div>
     <div class="footer-columns">
         <h5>Información</h5>

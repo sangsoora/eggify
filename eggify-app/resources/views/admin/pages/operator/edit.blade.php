@@ -56,28 +56,22 @@
                         </div><!-- Col -->
                     </div><!-- Row -->
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 {!! Form::label('operator_job_id', trans('admin.page.operator.table.operator_job')) !!}
                                 {!! Form::select('operator_job_id', $operatorjob->pluck('name', 'id'), $operator->operator_job_id, ['class' => 'form-control', 'id' => 'operator_job_id']) !!}
                             </div>
                         </div><!-- Col -->
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 {!! Form::label('operator_job_tag_id', trans('admin.page.operator.table.operator_job_tag')) !!}
                                 {!! Form::select('operator_job_tag_id', $operatorjobtag->pluck('name', 'id'), $operator->operator_job_tag_id, ['class' => 'form-control', 'id' => 'operator_job_tag_id']) !!}
                             </div>
                         </div><!-- Col -->
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 {!! Form::label('operator_employees_id', trans('admin.page.operator.table.operator_employees')) !!}
                                 {!! Form::select('operator_employees_id', $operatoremployees->pluck('name', 'id'), $operator->operator_employees_id, ['class' => 'form-control', 'id' => 'operator_employees_id']) !!}
-                            </div>
-                        </div><!-- Col -->
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                {!! Form::label('operator_position_id', trans('admin.page.operator.table.operator_position')) !!}
-                                {!! Form::select('operator_position_id', $operatorposition->pluck('name', 'id'), $operator->operator_position_id, ['class' => 'form-control', 'id' => 'operator_position_id']) !!}
                             </div>
                         </div><!-- Col -->
                     </div><!-- Row -->

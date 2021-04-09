@@ -14,7 +14,7 @@
     </header>
     <header class="d-flex header-opacity justify-content-between" id="header-desktop">
         <div class="p-2">
-            <button class="btn mr-auto p-0" type="button"><a href="/"><img src="/assets/img/logo-color.png"></a></button>
+            <button class="btn mr-auto p-0" type="button"><a href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}"><img src="/assets/img/logo-color.png"></a></button>
         </div>
         <div class="p-2 align-self-center nav-menu-desktop">
           <a href="{{ route('web.about') }}" class="mr-5">Sobre nosotros</a>
@@ -33,7 +33,7 @@
         <section id="banner-header" style="overflow: hidden;">
             <div class="container">
                 <div class="row mb-3">
-                    <div class="col"><a href="/"><img class="d-block m-auto logo" src="/assets/img/logo.png" alt="logo"></a></div>
+                    <div class="col"><a href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}"><img class="d-block m-auto logo" src="/assets/img/logo.png" alt="logo"></a></div>
                 </div>
                 <div class="row text-center mobile">
                     <div class="col px-4">
