@@ -78,12 +78,12 @@
         <div class="modal fade" role="dialog" tabindex="-1" id="modal-done">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                    <div class="modal-header"><a href="/" class="close" aria-label="Close"><span aria-hidden="true">×</span></a></div>
+                    <div class="modal-header"><a href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}" class="close" aria-label="Close"><span aria-hidden="true">×</span></a></div>
                     <div class="modal-body">
                         <p>Mensaje enviado correctamente.</p>
                     </div>
                     <div class="modal-footer">
-                        <a class="btn btn-secondary rounded-pill w-100 m-auto" role="button" href="/">Volver al inicio</a>
+                        <a class="btn btn-secondary rounded-pill w-100 m-auto" role="button" href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}">Volver al inicio</a>
                     </div>
                 </div>
             </div>

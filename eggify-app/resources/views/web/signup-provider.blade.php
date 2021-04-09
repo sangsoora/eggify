@@ -8,7 +8,7 @@
     </header>
     <header class="d-flex header-opacity justify-content-between" id="header-desktop">
         <div class="p-2">
-            <button class="btn mr-auto p-0" type="button"><a href="/"><img src="/assets/img/logo-color.png"></a></button>
+            <button class="btn mr-auto p-0" type="button"><a href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}"><img src="/assets/img/logo-color.png"></a></button>
         </div>
         <div class="p-2 align-self-center nav-menu-desktop">
           <a href="{{ route('web.about') }}" class="mr-5">Sobre nosotros</a>
@@ -57,13 +57,13 @@
                     <div class="modal fade" role="dialog" tabindex="-1" id="signup-modal-done">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
-                                <div class="modal-header"><a href="/" class="close" aria-label="Close"><span aria-hidden="true">×</span></a></div>
+                                <div class="modal-header"><a href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}" class="close" aria-label="Close"><span aria-hidden="true">×</span></a></div>
                                 <div class="modal-body">
                                     <p>Gracias! Ya formas parte de nosotros. ¿Tienes tiempo para completar tu perfil ahora? Sino, no te preocupes, lo podrás hacer más tarde.</p>
                                 </div>
                                 <div class="modal-footer">
                                     <a class="btn btn-primary rounded-pill w-100 mx-0 mt-0 mb-3" role="button" href="{{ route('web.user.profile.edit') }}">Completar mi perfil ahora</a>
-                                    <a class="btn btn-secondary rounded-pill w-100 m-auto" role="button" href="/">Recordarme luego</a></div>
+                                    <a class="btn btn-secondary rounded-pill w-100 m-auto" role="button" href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}">Recordarme luego</a></div>
                             </div>
                         </div>
                     </div>

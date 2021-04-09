@@ -116,7 +116,7 @@ return [
                 'plan' => 'Plan',
                 'gamification' => 'Plan de gamificación',
                 'operator_job' => 'Trabajo',
-                'operator_job_tag' => 'Tipo trabajo',
+                'operator_job_tag' => 'Cargo',
                 'operator_employees' => 'Num. Empleados',
                 'operator_position' => 'Cargo',
             ],

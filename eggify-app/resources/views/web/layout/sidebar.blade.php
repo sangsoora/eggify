@@ -1,6 +1,6 @@
 <div id="sidenav" class="sidenav">
     <a class="closebtn" href="javascript:void(0)" onclick="sidenav.close()"><i class="fas fa-arrow-left mr-2"></i><img src="/assets/img/logo-text.png"></a>
-    <a href="/"><i class="fas fa-home mr-3"></i>Home</a>
+    <a href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}"><i class="fas fa-home mr-3"></i>Home</a>
     <a href="{{ route('web.about') }}"><i class="fas fa-egg mr-3"></i>Sobre nosotros</a>
     <a href="{{ route('web.search.provider') }}"><i class="fas fa-search mr-3"></i>Proveedores</a>
 

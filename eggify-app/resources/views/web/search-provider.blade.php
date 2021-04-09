@@ -3,8 +3,8 @@
 @section('content')
     <div id="sidepopup" class="sidepopup" style="left: 0; z-index: 4;">
         <div class="d-flex closebtn pb-2">
-            <a href="/" class="btn mr-auto p-0"><img src="/assets/img/logo-color.png"></a>
-            <a href="/" class="btn p-0"><i class="fa fa-close mr-2"></i></a>
+            <a href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}" class="btn mr-auto p-0"><img src="/assets/img/logo-color.png"></a>
+            <a href="{{ auth()->check() && \App\Models\User::findOrFail(auth()->user()->id)->isProvider() ? route('web.provider-dashboard'): route('web.index') }}" class="btn p-0"><i class="fa fa-close mr-2"></i></a>
         </div>
         <h5 class="title-action mb-2 pl-4">¿Qué buscas?</h5>
         <div class="link-list">

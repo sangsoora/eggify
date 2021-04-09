@@ -107,7 +107,7 @@
                 @foreach($providers as $i => $el)
                     <div class="card">
                         <a href="{{ route('web.provider', $el->id) }}">
-                            <img class="radius" src="{{ $el->provider_company != null ? $el->provider_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}" alt="{{ $el->provider_company != null ? $el->provider_company->name : '' }}">
+                            <img class="radius" src="{{ sizeof($el->images) > 0 ? getUrlResource('/provider/' . $el->id . '/' . $el->images[0]['name']) : '/assets/images/no-product.png' }}" alt="{{ $el->provider_company != null ? $el->provider_company->name : '' }}">
                         </a>
                         <div class="card-body mt-2">
                             <a class="card-link title-action" href="{{ route('web.provider', $el->id) }}">

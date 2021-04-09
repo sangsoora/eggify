@@ -273,7 +273,10 @@ class UserController extends Controller
             $operatorCompanies = OperatorCompany::all();
             $companyEmployees = OperatorEmployee::all();
 
-            return view('web.profile-operator-edit', compact('bodyClass', 'user', 'operatorCompanies', 'companyEmployees'));
+            $jobs = OperatorJob::all();
+            $jobs_tag = OperatorJobTag::all();
+
+            return view('web.profile-operator-edit', compact('bodyClass', 'user', 'operatorCompanies', 'companyEmployees', 'jobs', 'jobs_tag'));
 
         } else if ($user->isProvider()) {
 
@@ -316,6 +319,7 @@ class UserController extends Controller
         }
 
         $request->merge([
+            'policy_consent' => 1,
             'postal_code_id' => $address_id['postal_code_id']
         ]);
 
