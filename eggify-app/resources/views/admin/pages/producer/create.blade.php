@@ -60,6 +60,46 @@
                             </div>
                         </div><!-- Col -->
                     </div><!-- Row -->
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {!! Form::label('about', trans('admin.page.producer.table.about')) !!}
+                                {!! Form::textarea('about', old('about'), ['class' => 'form-control', '', 'id'=> 'about', 'size' => '5x5']) !!}
+                            </div>
+                        </div><!-- Col -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {!! Form::label('description', trans('admin.page.producer.table.description')) !!}
+                                {!! Form::textarea('description', old('description'), ['class' => 'form-control', '', 'id'=> 'description', 'size' => '5x5']) !!}
+                            </div>
+                        </div><!-- Col -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {!! Form::label('usp', trans('admin.page.producer.table.usp')) !!}
+                                {!! Form::textarea('usp', old('usp'), ['class' => 'form-control', '', 'id'=> 'usp', 'size' => '5x5']) !!}
+                            </div>
+                        </div><!-- Col -->
+                    </div><!-- Row -->
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {!! Form::label('municipality', trans('admin.page.producer.table.municipality')) !!}
+                                {!! Form::input('text', 'municipality', old('municipality'), ['id' => 'municipality', 'class' => 'form-control', 'placeholder' => trans('admin.page.provider.table.municipality')]) !!}
+                            </div>
+                        </div><!-- Col -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {!! Form::label('location', trans('admin.page.producer.table.location')) !!}
+                                {!! Form::input('text', 'location', old('location'), ['id' => 'location', 'class' => 'form-control', 'placeholder' => trans('admin.page.provider.table.location')]) !!}
+                            </div>
+                        </div><!-- Col -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {!! Form::label('starting', trans('admin.page.producer.table.starting')) !!}
+                                {!! Form::input('date', 'starting', old('starting'), ['id' => 'starting', 'class' => 'form-control', 'placeholder' => trans('admin.page.provider.table.starting')]) !!}
+                            </div>
+                        </div><!-- Col -->
+                    </div><!-- Row -->
                     <button type="submit" class="btn btn-primary mr-2">@lang('global.general.save')</button>
                     <a href="{{ route('admin.producer') }}" class="btn btn-light">@lang('global.general.cancel')</a>
                     {!! Form::close() !!}

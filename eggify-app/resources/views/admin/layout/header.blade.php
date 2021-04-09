@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </li>
-            @if ($providers_not_visible > 0)
+            @if ($providers_not_visible > 0 || $producers_not_visible > 0)
                 <li class="nav-item dropdown nav-notifications">
                     <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
@@ -46,21 +46,38 @@
                             <p class="mb-0 font-weight-medium">Notificaciones</p>
                         </div>
                         <div class="dropdown-body">
-
-                            <a href="javascript:;" class="dropdown-item">
-                                <div class="icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus">
-                                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="8.5" cy="7" r="4"></circle>
-                                        <line x1="20" y1="8" x2="20" y2="14"></line>
-                                        <line x1="23" y1="11" x2="17" y2="11"></line>
-                                    </svg>
-                                </div>
-                                <div class="content">
-                                    <p>Proveedores pendientes de validar</p>
-                                    <p class="sub-text text-muted"></p>
-                                </div>
-                            </a>
+                            @if ($providers_not_visible > 0)
+                                <a href="{{ route('admin.provider') }}" class="dropdown-item">
+                                    <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus">
+                                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="8.5" cy="7" r="4"></circle>
+                                            <line x1="20" y1="8" x2="20" y2="14"></line>
+                                            <line x1="23" y1="11" x2="17" y2="11"></line>
+                                        </svg>
+                                    </div>
+                                    <div class="content">
+                                        <p>Proveedores pendientes de validar</p>
+                                        <p class="sub-text text-muted"></p>
+                                    </div>
+                                </a>
+                            @endif
+                            @if ($producers_not_visible > 0)
+                                <a href="{{ route('admin.producer') }}" class="dropdown-item">
+                                    <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus">
+                                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="8.5" cy="7" r="4"></circle>
+                                            <line x1="20" y1="8" x2="20" y2="14"></line>
+                                            <line x1="23" y1="11" x2="17" y2="11"></line>
+                                        </svg>
+                                    </div>
+                                    <div class="content">
+                                        <p>Productores pendientes de validar</p>
+                                        <p class="sub-text text-muted"></p>
+                                    </div>
+                                </a>
+                            @endif
                         </div>
                         <div class="dropdown-footer d-flex align-items-center justify-content-center">
                         </div>

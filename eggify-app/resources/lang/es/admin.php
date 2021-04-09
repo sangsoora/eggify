@@ -77,6 +77,9 @@ return [
                 'about' => '¿Quiénes sois?',
                 'description' => '¿A qué os dedicáis?',
                 'usp' => '¿Cuál es vuestra propuesta de valor (USP)?',
+                'municipality' => 'Municipio ubicados',
+                'location' => 'Localización donde operan',
+                'starting' => 'Fecha inicio en el mercado',
             ],
         ],
         'producer' => [
@@ -99,6 +102,9 @@ return [
                 'about' => '¿Quiénes sois?',
                 'description' => '¿A qué os dedicáis?',
                 'usp' => '¿Cuál es vuestra propuesta de valor (USP)?',
+                'municipality' => 'Municipio ubicados',
+                'location' => 'Localización donde operan',
+                'starting' => 'Fecha inicio en el mercado',
             ],
         ],
         'operator' => [

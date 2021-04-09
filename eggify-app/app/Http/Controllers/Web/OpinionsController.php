@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Note;
 use App\Models\Provider;
+use App\Models\ProviderImages;
 use App\Models\Rating;
 use App\Models\RatingCriteria;
 use App\Models\RatingProvider;
@@ -50,7 +51,9 @@ class OpinionsController extends Controller
 
         $ratingsProvider = RatingProvider::where('provider_id', $provider->id)->get();
 
-        return view('web.opinions', compact('bodyClass', 'provider', 'ratingsCriteria', 'ratingsProvider'));
+        $providerImages = ProviderImages::where('provider_id', $provider->id)->get();
+
+        return view('web.opinions', compact('bodyClass', 'provider', 'ratingsCriteria', 'ratingsProvider', 'providerImages'));
     }
 
     public function add(Request $request, $id)
@@ -85,7 +88,9 @@ class OpinionsController extends Controller
 
         $ratingsProvider = RatingProvider::where('provider_id', $provider->id)->get();
 
-        return view('web.opinions-add', compact('bodyClass', 'id', 'provider', 'ratingsCriteria', 'ratingsProvider'));
+        $providerImages = ProviderImages::where('provider_id', $provider->id)->get();
+
+        return view('web.opinions-add', compact('bodyClass', 'id', 'provider', 'ratingsCriteria', 'ratingsProvider', 'providerImages'));
     }
 
     public function addStore(Request $request, $id)

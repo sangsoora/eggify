@@ -74,7 +74,7 @@
                                     {{--<span class="tag">Premium</span>
                                     <span class="like"><i class="la la-heart"></i></span>--}}
                                     <a href="{{ route('web.provider', $el->id) }}">
-                                        <img class="card-img w-100 d-block" src="{{ $el->provider_company != null ? $el->provider_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}" alt="{{ $el->provider_company != null ? $el->provider_company->name : '' }}">
+                                        <img class="card-img w-100 d-block" src="{{ sizeof($el->images) > 0 ? getUrlResource('/provider/' . $el->id . '/' . $el->images[0]['name']) : '/assets/images/no-product.png' }}" alt="{{ $el->provider_company != null ? $el->provider_company->name : '' }}">
                                     </a>
                                     <div class="card-body">
                                         <h4 class="card-title">{{ $el->name }}</h4>

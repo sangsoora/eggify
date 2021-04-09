@@ -26,8 +26,11 @@ class BladeServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('admin.*', function($view){
-            $providers_not_visible = Provider::where('visible', 0)->count();
+            $providers_not_visible = Provider::where('visible', 0)->distributor()->count();
+            $producers_not_visible = Provider::where('visible', 0)->producer()->count();
+
             $view->with('providers_not_visible', $providers_not_visible);
+            $view->with('producers_not_visible', $producers_not_visible);
         });
 
         view()->composer('web.*', function($view){

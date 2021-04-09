@@ -12,19 +12,26 @@
                 {{--<span class="tag">Premium</span>
                 <span class="share"><i class="la la-share-alt"></i></span>
                 <span class="like"><i class="la la-heart"></i></span>--}}
-                <div class="carousel slide" data-ride="carousel" data-interval="false" data-pause="false" data-keyboard="false">
+                <div id="providerCarousel" class="carousel slide" data-ride="carousel" data-interval="false" data-pause="false" data-keyboard="false">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="w-100 d-block" src="{{ $provider->provider_company != null ? $provider->provider_company->getUrlImageAttribute() : '/assets/images/no-product.png' }}" alt="{{ $provider->provider_company != null ? $provider->provider_company->name : '' }}">
-                        </div>
-                        {{--<div class="carousel-item"><img class="w-100 d-block" src="/assets/img/slider-comunity.png" alt="Slide Image"></div>
-                        <div class="carousel-item"><img class="w-100 d-block" src="/assets/img/slider-providers.png" alt="Slide Image"></div>--}}
+                        @foreach($providerImages as $i => $image)
+                            <div class="carousel-item {{ $i == 0 ? 'active' : '' }}">
+                                <img class="w-100 d-block" src="{{ $image->getUrlImageAttribute() }}" alt="" height="240px">
+                            </div>
+                        @endforeach
                     </div>
-                    <div><a class="carousel-control-prev" href="#" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#" role="button" data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
+                    <a class="carousel-control-prev" href="#providerCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#providerCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                     <ol class="carousel-indicators">
-                        <li data-target="#" data-slide-to="0" class="active"></li>
-                        {{--<li data-target="#" data-slide-to="1"></li>
-                        <li data-target="#" data-slide-to="2"></li>--}}
+                        @foreach($providerImages as $i => $image)
+                            <li data-target="#providerCarousel" data-slide-to="{{ $i }}" class="{{ $i == 0 ? 'active' : '' }}"></li>
+                        @endforeach
                     </ol>
                 </div>
                 <div class="card-body">

@@ -111,6 +111,15 @@ class Provider extends Model
         return ($this->visible != null && $this->visible);
     }
 
+    public function deleteImages()
+    {
+        if (existsResource($this->getFolder())) {
+            return deleteResource($this->getFolder());
+        }
+
+        return false;
+    }
+
     public function getFolder()
     {
         return '/provider/' . $this->id . '/';

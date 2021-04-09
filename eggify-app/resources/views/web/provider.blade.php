@@ -32,7 +32,7 @@
                 {{--<span class="tag">Premium</span>
                 <span class="share"><i class="la la-share-alt"></i></span>
                 <span class="like"><i class="la la-heart"></i></span>--}}
-                <div class="carousel slide" data-ride="carousel" data-interval="false" data-pause="false" data-keyboard="true">
+                <div id="providerCarousel" class="carousel slide" data-ride="carousel" data-interval="false" data-pause="false" data-keyboard="true">
                     <div class="carousel-inner">
                         @foreach($providerImages as $i => $image)
                             <div class="carousel-item {{ $i == 0 ? 'active' : '' }}">
@@ -40,10 +40,17 @@
                             </div>
                         @endforeach
                     </div>
-                    <div><a class="carousel-control-prev" href="#" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#" role="button" data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
+                    <a class="carousel-control-prev" href="#providerCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#providerCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                     <ol class="carousel-indicators">
                         @foreach($providerImages as $i => $image)
-                            <li data-target="#" data-slide-to="{{ $i }}" class="{{ $i == 0 ? 'active' : '' }}"></li>
+                            <li data-target="#providerCarousel" data-slide-to="{{ $i }}" class="{{ $i == 0 ? 'active' : '' }}"></li>
                         @endforeach
                     </ol>
                 </div>

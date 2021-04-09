@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Helpers\Helper;
+use App\Http\Traits\Geo;
 use App\Models\Provider;
 use App\Models\ProviderCategory;
 use App\Models\ProviderCompany;
@@ -70,6 +71,24 @@ class ProducerController extends Controller
 
     public function store(Request $request)
     {
+        $addressData = Helper::getAddressData($request->address);
+
+        if (!isset($addressData->postal_code) || !isset($addressData->city) || !isset($addressData->state) || !isset($addressData->country)) {
+            return response()->json(array(
+                'status' => 500,
+                'message' => 'La dirección no es correcta'
+            ));
+        }
+
+        $address_id = Geo::postal_code($addressData);
+
+        if ($address_id == null) {
+            return response()->json(array(
+                'status' => 500,
+                'message' => 'La dirección no es correcta'
+            ));
+        }
+
         $request->merge([
             'password' => bcrypt($request->password),
             'role_id' => Role::getUser()->firstOrFail()->id,
@@ -82,6 +101,7 @@ class ProducerController extends Controller
             'user_id' => $user->id,
             'provider_plan_id' => 1,
             'provider_type_id' => 2,
+            'postal_code_id' => $address_id['postal_code_id']
         ]);
 
         $provider = Provider::create($request->all());
@@ -102,16 +122,36 @@ class ProducerController extends Controller
 
     public function update(Request $request, $id)
     {
+        $addressData = Helper::getAddressData($request->address);
+
+        if (!isset($addressData->postal_code) || !isset($addressData->city) || !isset($addressData->state) || !isset($addressData->country)) {
+            return response()->json(array(
+                'status' => 500,
+                'message' => 'La dirección no es correcta'
+            ));
+        }
+
+        $address_id = Geo::postal_code($addressData);
+
+        if ($address_id == null) {
+            return response()->json(array(
+                'status' => 500,
+                'message' => 'La dirección no es correcta'
+            ));
+        }
+
         $provider = Provider::findOrFail($id);
         $user = User::findOrFail($provider->user->id);
 
         if ($request->password) {
             $request->merge([
-                'password' => bcrypt($request->password)
+                'password' => bcrypt($request->password),
+                'postal_code_id' => $address_id['postal_code_id']
             ]);
         } else {
             $request->merge([
-                'password' => $user->password
+                'password' => $user->password,
+                'postal_code_id' => $address_id['postal_code_id']
             ]);
         }
 
@@ -139,6 +179,9 @@ class ProducerController extends Controller
                 $providerCompany = ProviderCompany::findOrFail($provider->provider_company->id);
                 $providerCompany->delete();
             }
+
+            // Images
+            $provider->deleteImages();
 
             $provider->delete();
             $user->delete();

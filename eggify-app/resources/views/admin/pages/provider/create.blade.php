@@ -60,6 +60,46 @@
                             </div>
                         </div><!-- Col -->
                     </div><!-- Row -->
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {!! Form::label('about', trans('admin.page.provider.table.about')) !!}
+                                {!! Form::textarea('about', old('about'), ['class' => 'form-control', '', 'id'=> 'about', 'size' => '5x5']) !!}
+                            </div>
+                        </div><!-- Col -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {!! Form::label('description', trans('admin.page.provider.table.description')) !!}
+                                {!! Form::textarea('description', old('description'), ['class' => 'form-control', '', 'id'=> 'description', 'size' => '5x5']) !!}
+                            </div>
+                        </div><!-- Col -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {!! Form::label('usp', trans('admin.page.provider.table.usp')) !!}
+                                {!! Form::textarea('usp', old('usp'), ['class' => 'form-control', '', 'id'=> 'usp', 'size' => '5x5']) !!}
+                            </div>
+                        </div><!-- Col -->
+                    </div><!-- Row -->
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {!! Form::label('municipality', trans('admin.page.provider.table.municipality')) !!}
+                                {!! Form::input('text', 'municipality', old('municipality'), ['id' => 'municipality', 'class' => 'form-control', 'placeholder' => trans('admin.page.provider.table.municipality')]) !!}
+                            </div>
+                        </div><!-- Col -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {!! Form::label('location', trans('admin.page.provider.table.location')) !!}
+                                {!! Form::input('text', 'location', old('location'), ['id' => 'location', 'class' => 'form-control', 'placeholder' => trans('admin.page.provider.table.location')]) !!}
+                            </div>
+                        </div><!-- Col -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {!! Form::label('starting', trans('admin.page.provider.table.starting')) !!}
+                                {!! Form::input('date', 'starting', old('starting'), ['id' => 'starting', 'class' => 'form-control', 'placeholder' => trans('admin.page.provider.table.starting')]) !!}
+                            </div>
+                        </div><!-- Col -->
+                    </div><!-- Row -->
                     <button type="submit" class="btn btn-primary mr-2">@lang('global.general.save')</button>
                     <a href="{{ route('admin.provider') }}" class="btn btn-light">@lang('global.general.cancel')</a>
                     {!! Form::close() !!}
@@ -68,3 +108,14 @@
         </div>
     </div>
 @endsection
+
+@push('custom-scripts')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&libraries=places&language={{ app()->getLocale() }}">
+    </script>
+
+    <script type="text/javascript">
+        const input = document.getElementById("address");
+        const autocomplete = new google.maps.places.Autocomplete(input);
+    </script>
+@endpush

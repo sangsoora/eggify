@@ -82,6 +82,26 @@
                     </div><!-- Row -->
                     <div class="row">
                         <div class="col-sm-4">
+                            <div class="form-group">
+                                {!! Form::label('municipality', trans('admin.page.provider.table.municipality')) !!}
+                                {!! Form::input('text', 'municipality', $provider->municipality, ['id' => 'municipality', 'class' => 'form-control', 'placeholder' => trans('admin.page.provider.table.municipality')]) !!}
+                            </div>
+                        </div><!-- Col -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {!! Form::label('location', trans('admin.page.provider.table.location')) !!}
+                                {!! Form::input('text', 'location', $provider->location, ['id' => 'location', 'class' => 'form-control', 'placeholder' => trans('admin.page.provider.table.location')]) !!}
+                            </div>
+                        </div><!-- Col -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                {!! Form::label('starting', trans('admin.page.provider.table.starting')) !!}
+                                {!! Form::input('date', 'starting', $provider->starting, ['id' => 'starting', 'class' => 'form-control', 'placeholder' => trans('admin.page.provider.table.starting')]) !!}
+                            </div>
+                        </div><!-- Col -->
+                    </div><!-- Row -->
+                    <div class="row">
+                        <div class="col-sm-4">
                             <div class="form-check form-check-flat form-check-primary">
                                 <label class="form-check-label">
                                     {!! Form::checkbox('visible', 1, $provider->visible, ['id' => 'visible', 'class' => 'form-check-input']) !!}
